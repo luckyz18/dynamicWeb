@@ -1,0 +1,29 @@
+package com.hou_DataSource.dbcp;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import org.junit.Test;
+
+import com.hou_utils.jdbcUtils;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+public class C3p0Demo {
+	@Test
+	public void f1() {
+		ComboPooledDataSource ds = new ComboPooledDataSource();
+		ds.setDriverClass("com.mysql.jdbc.Driver"));
+		ds.setJdbcUrl("jdbc:mysql:///day07?useUnicode=true&characterEncoding=utf8");
+		ds.setUser("root");
+		ds.setPassword("123456");
+		
+		Connection conn = ds.getConnection();
+		String sql="insert into category values(?,?)";
+		PreparedStatement st =conn.prepareStatement(sql);
+		st.setString(1, "c011");
+		st.setString(2, "家具");
+		int i =st.executeUpdate();
+		System.out.println(i); 
+		jdbcUtils.closeResource(conn, st, null); 
+	}
+}

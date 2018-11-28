@@ -1,0 +1,38 @@
+package com.hou_DataSource.dbcp;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.lang.Exception;
+import org.apache.commons.dbcp.BasicDataSource;
+import org.junit.Test;
+
+import com.hou_utils.jdbcUtils;
+import com.hou_utils.jdbcUtils_;
+
+import java.sql.PreparedStatement;
+
+
+public class DbcpDemo {
+
+	@Test
+	public void f1() throws Exception {
+//		创建连接池
+		BasicDataSource ds = new BasicDataSource();
+//		配置信息等
+		ds.setDriverClassName("com.mysql.jdbc.Driver");
+		ds.setUrl("jdbc:mysql://localhost:8080/day07");
+		ds.setUsername("root");
+		ds.setPassword("123456");
+		
+		Connection conn = ds.getConnection();
+		String sql="insert into category values(?,?)";
+		PreparedStatement st =conn.prepareStatement(sql);
+		st.setString(1, "c010");
+		st.setString(2, "家具");
+		int i =st.executeUpdate();
+		System.out.println(i); 
+		jdbcUtils.closeResource(conn, st, null);
+		
+
+	}
+}

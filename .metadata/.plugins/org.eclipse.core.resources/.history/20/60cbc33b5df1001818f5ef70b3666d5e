@@ -1,0 +1,23 @@
+package com.reflect;
+
+import org.junit.Test;
+
+import com.web.HelloMyServlet;
+
+public class Demo {
+	@Test
+	public void f1() {
+		//调用HelloMyServlet 方法
+		HelloMyServlet a =new HelloMyServlet();
+		a.add();
+		a.add(10, 20);
+	}
+	@Test
+	public void f2() throws Exception {
+		//通过字节码对象创建一个实例对象
+		Class clazz=Class.forName("com.web.HelloMyServlet");   //类对象
+		HelloMyServlet a = (HelloMyServlet) clazz.newInstance();  //实例对象
+		a.add();
+	}
+	
+}

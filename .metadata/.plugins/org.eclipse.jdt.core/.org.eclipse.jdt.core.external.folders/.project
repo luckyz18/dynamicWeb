@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>.org.eclipse.jdt.core.external.folders</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>.link1</name>
+			<type>2</type>
+			<location>E:/学习/java/2017黑马JAVA视频/就业班+Hadoop大数据/【阶段01】Javaweb/【阶段01】Javaweb1/day07-jdbc/resource/jar/驱动/mysql-connector-java-5.1.39/src</location>
+		</link>
+	</linkedResources>
+</projectDescription>

@@ -1,0 +1,22 @@
+package com.hou_Dbutils;
+
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.junit.Test;
+
+import com.hou_Utils.DataSourceUtils;
+
+public class CrudDemo {
+	@Test
+	public void insert_() throws SQLException {
+		//创建一个queryRunner类
+		QueryRunner qr = new QueryRunner(new DataSourceUtils().getDataSource());
+		//写sql
+		String sql = "insert into category values(?,?)";
+		//执行sql
+		qr.update(sql, "c14","14啊");
+	}
+}

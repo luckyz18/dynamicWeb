@@ -1,0 +1,16 @@
+package com.reflect;
+
+import org.junit.Test;
+
+import com.web.HelloMyServlet;
+
+public class Demo {
+	@Test
+	public void f1() {
+		//调用HelloMyServlet 方法
+		HelloMyServlet a =new HelloMyServlet();
+		a.add();
+		a.add(10, 20);
+	}
+	
+}

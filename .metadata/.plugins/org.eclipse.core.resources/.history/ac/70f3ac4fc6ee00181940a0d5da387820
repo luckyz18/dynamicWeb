@@ -1,0 +1,20 @@
+package com.hou_Dbutils;
+
+import java.sql.SQLException;
+import java.util.Arrays;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayHandler;
+import org.junit.Test;
+
+import com.hou_Utils.DataSourceUtils;
+
+public class ResultArrayHandler {
+	@Test
+	public void  arrayHandle() throws SQLException {
+		QueryRunner qr = new QueryRunner(new DataSourceUtils().getDataSource());
+		String sql = "select * from category";
+		Object[] query = qr.query(sql, new ArrayHandler());
+		System.out.println(Arrays.toString(query));
+	}
+}

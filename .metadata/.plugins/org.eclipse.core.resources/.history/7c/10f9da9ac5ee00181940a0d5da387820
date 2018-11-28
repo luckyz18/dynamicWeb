@@ -1,0 +1,10 @@
+package com.hou_Dbutils;
+
+import org.apache.commons.dbutils.QueryRunner;
+
+public class ResultArrayHandler {
+	public void  arrayHandle() {
+		QueryRunner qr = new QueryRunner()
+				
+	}
+}
