@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	id="WebApp_ID" version="2.5">
+	
+	<!-- 注册servlet 用servlet标签
+		servlet-name servlet名字 全局唯一
+		servlet-class  servlet 全限定名
+	 -->
+	<servlet>
+		<servlet-name>HelloServlet</servlet-name>
+		<servlet-class>com.servlet.HelloServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Request</servlet-name>
+		<servlet-class>com.servlet.Request</servlet-class>
+	</servlet>
+	<!-- 绑定路径
+		url-pattern：访问路径要求 必须以 /  开头
+	 -->
+	<servlet-mapping>
+		<servlet-name>HelloServlet</servlet-name>
+		<url-pattern>/hello</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Request</servlet-name>
+		<url-pattern>/request</url-pattern>
+	</servlet-mapping>
+</web-app>

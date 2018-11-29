@@ -37,4 +37,6 @@
 <fullyQualifiedTypeName name="com.web.HelloMyServlet"/>
 <fullyQualifiedTypeName name="org.dom4j.io.SAXReader"/>
 <fullyQualifiedTypeName name="org.dom4j.Element"/>
+<fullyQualifiedTypeName name="org.apache.coyote.http11.Http11AprProcessor"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
 </qualifiedTypeNameHistroy>
