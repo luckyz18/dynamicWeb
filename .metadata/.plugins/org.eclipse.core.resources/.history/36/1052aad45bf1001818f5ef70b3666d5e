@@ -1,9 +1,0 @@
-package com.web;
-
-public class HelloMyServlet {
-
-	public static void main(String[] args) {
-		
-	}
-
-}

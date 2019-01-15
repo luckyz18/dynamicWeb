@@ -11,6 +11,6 @@ public class HelloServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		super.doGet(req, resp);
-		System.out.println("请求已接收........");
+		System.out.println("请求已接收........测试64位eclispe能否关联github");
 	}
 }

@@ -13,6 +13,7 @@ import org.dom4j.io.SAXReader;
 public class Dom4jDemo {
 	public static void main(String[] args) throws Exception {
 		SAXReader reader = new SAXReader();
+		System.out.println("sdsds");
 		Document doc = reader.read("E:\\Program\\EclispeProEE\\day08\\xml\\web.xml");
 		Element root = doc.getRootElement();
 		//泛型

@@ -39,4 +39,5 @@
 <fullyQualifiedTypeName name="org.dom4j.Element"/>
 <fullyQualifiedTypeName name="org.apache.coyote.http11.Http11AprProcessor"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>
