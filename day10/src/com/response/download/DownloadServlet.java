@@ -15,8 +15,6 @@ import org.apache.commons.io.IOUtils;
 
 import com.utils.DownLoadUtils;
 
-import sun.nio.ch.IOUtil;
-
 /**
  * 下载文件
  */
@@ -32,12 +30,15 @@ public class DownloadServlet extends HttpServlet {
 		//设置下载头信息
 //		response.setHeader("content-disposition", "attachment;filename="+filename);
 		
-		//下面这种方式，下载时显示的文件名称 一般的浏览器需要提供utf8的文件名称  ，才可以正常显示下载的文件名  ，不推荐 因为不兼容火狐
-//		response.setHeader("content-disposition", "attachment;filename="+URLEncoder.encode(filename, "utf-8"));
+//		下面这种方式，下载时显示的文件名称 一般的浏览器需要提供utf8的文件名称  ，才可以正常显示下载的文件名  ，不推荐 因为不兼容火狐
+		response.setHeader("content-disposition", "attachment;filename="+URLEncoder.encode(filename, "utf-8"));
 		
-		//使用工具类 ，推荐
-		filename = DownLoadUtils.getName(request.getParameter("user-agent"), filename);
-		response.setHeader("content-disposition", "attachment;filename="+filename);
+//		//使用工具类 ，推荐
+//		filename = DownLoadUtils.getName(request.getParameter("user-agent"), filename);
+//		response.setHeader("content-disposition", "attachment;filename="+filename);
+//		
+		
+		
 		//对拷流
 		//获取输入流 输出流
 		ServletOutputStream os = response.getOutputStream();
