@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 
+	定时刷新的第二种方法  第一种方法设置响应头
+	http-equiv:响应头
+	content:响应的内容
+ -->
+ 
+<meta http-equiv="refresh" content="3;/day10/refresh2.html">
+
+<title>Insert title here</title>
+</head>
+<body>
+	refresh1,<span id="sid">3</span>秒之后跳转到refresh2
+</body>
+
+<script type="text/javascript">
+	onload = function(){
+		//设置定时器
+		setInterval(changeS,1000);
+		
+	}
+	i=3;
+	function changeS() {
+		//获取元素
+		var obj = document.getElementById("sid");
+		//操作元素标签体
+		obj.innerHTML = --i;
+		
+	} 
+</script>
+
+</html>

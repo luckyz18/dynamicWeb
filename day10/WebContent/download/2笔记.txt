@@ -1,0 +1,24 @@
+分布式：
+buptdce2017@163.com 
+71234567
+
+宽带：
+上交报告邮箱
+ujinhao@126.com
+kdtxw2018
+第20周周末为最后期限 报告形式：硬拷贝或电子版均可 电子版发送时 作业的文件名称务必为“姓名-学号” 邮件主题为“宽带通信网作业”
+
+
+计网：
+ftp://10.3.255.85
+– Username
+comnet2018
+– Password
+bupt
+
+文档命名规则为：学号_姓名_v[number].txt 
+权限：只能上传，不能下载或修改，如果传错，则修改version号，最终以最大的version号为准
+期限
+– 2018.12.31，10:00pm
+– You should upload your report before it !
+
