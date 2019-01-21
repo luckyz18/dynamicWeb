@@ -99,4 +99,34 @@
     <servlet-name>Param_Servlet</servlet-name>
     <url-pattern>/param_</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DemoServlet</display-name>
+    <servlet-name>DemoServlet</servlet-name>
+    <servlet-class>com.request.Demo.DemoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DemoServlet</servlet-name>
+    <url-pattern>/demo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Dis1Servlet</display-name>
+    <servlet-name>Dis1Servlet</servlet-name>
+    <servlet-class>com.request.Dis.Dis1Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Dis1Servlet</servlet-name>
+    <url-pattern>/dis1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Dis2Servlet</display-name>
+    <servlet-name>Dis2Servlet</servlet-name>
+    <servlet-class>com.request.Dis.Dis2Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Dis2Servlet</servlet-name>
+    <url-pattern>/dis2</url-pattern>
+  </servlet-mapping>
 </web-app>
