@@ -1472,7 +1472,15 @@
 39.	案例2-记录用户浏览历史
 		技术：cookie
 		
-	
+
+40.	array list arrayList  linkedList
+		Array：它是数组，申明数组的时候就要初始化并确定长度，长度不可变，而且它只能存储同一类型的数据
+		
+		list:接口  不能构造
+		   List list = new ArrayList();  ArrayList是list的实现类
+		ArrayList：它是一个集合，需要先申明，然后再添加数据，长度是根据内容的多少而改变的，动态数组，，ArrayList可以存放不同类型的数据，在存储基本类型数据的时候要使用基本数据类型的包装类    主要用于访问和存放数据
+		
+		linkedList: 是一个双向链表 ，  主要用于操作数据
 	
 	
 	
