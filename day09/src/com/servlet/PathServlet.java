@@ -13,7 +13,7 @@ public class PathServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path  = PathServlet.class.getClassLoader().getResource("/2.txt").getPath();
-//		String path1 = PathServlet.class.getClassLoader().getResourceAsStream("2.txt").getPath();  //错？
+//		String path1 = PathServlet.class.getClassLoader().getResourceAsStream("2.txt");  
 		System.out.println(path);
 	}
 

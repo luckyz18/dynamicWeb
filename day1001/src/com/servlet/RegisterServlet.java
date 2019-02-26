@@ -36,7 +36,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		User user = new User();
 		try {
-			BeanUtils.populate(user, request.getParameterMap());
+			BeanUtils.populate(user, request.getParameterMap());   //工具类  导入jar包 作用：封装对象
 		} catch (Exception e1) {		
 			e1.printStackTrace();
 		} 

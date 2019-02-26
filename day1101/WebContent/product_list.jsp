@@ -1,3 +1,4 @@
+<%@page import="com.utils.CookieUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -221,7 +222,23 @@
 			<div style="overflow: hidden;">
 
 				<ul style="list-style: none;">
-					<li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;"><img src="products/1/cs10001.jpg" width="130px" height="130px" /></li>
+				<%
+					Cookie c = CookieUtils.getCookieByName("ids", request.getCookies());
+					if(c==null){
+				%>
+				<h2>没有浏览记录</h2>
+				<%
+					}else{
+						String[] arr = c.getValue().split("-");
+						for(String i:arr){
+				%>
+				<li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;"><img src="products/1/cs1000<%=i %>.jpg" width="130px" height="130px" /></li>
+				<% 
+						}
+					}
+				
+				%>
+					
 				</ul>
 
 			</div>

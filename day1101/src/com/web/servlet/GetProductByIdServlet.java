@@ -24,6 +24,7 @@ public class GetProductByIdServlet extends HttpServlet {
 		
 		//判断cookie是否为空
 		String id = request.getParameter("id");
+		System.out.println("request.getCookies():"+request.getCookies());
 		Cookie c = CookieUtils.getCookieByName("ids",request.getCookies());
 		System.out.println("c:"+c);
 		
@@ -36,9 +37,10 @@ public class GetProductByIdServlet extends HttpServlet {
 			//若cookie不空  继续判断ids是否包含id  ids=1-2-3
 			//获取值
 			ids=c.getValue();
+			System.out.println(ids);
 			//分割ids
-			String[] arr = ids.split("-");
-			List<String> aslist = Arrays.asList(arr);   //长度不可变的list'
+			String[] arr = ids.split("-");   //分割成数组存储
+			List<String> aslist = Arrays.asList(arr);   //长度不可变的list' 集合
 			LinkedList<String> linklist = new LinkedList<>(aslist);
 			
 			//是否包含id、
@@ -64,10 +66,10 @@ public class GetProductByIdServlet extends HttpServlet {
 			}
 			
 			//处理最后一个“-”
-			ids=ids.substring(0, ids.length()-1);
+			ids=ids.substring(0, ids.length()-1);	//截   ids=3-2-1 
 			
 		}
-		System.out.println("ids:"+ids);
+		System.out.println("ids:"+ids);	
 		
 		//将ids写回去
 		c = new Cookie("ids", ids);
@@ -79,7 +81,7 @@ public class GetProductByIdServlet extends HttpServlet {
 		response.addCookie(c);
 		
 		//跳转页面
-		
+		//getContextPath : /day1101
 		response.sendRedirect(request.getContextPath()+"/product_info"+id+".htm");
 	}
 
