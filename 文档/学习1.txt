@@ -1,0 +1,857 @@
+1.	<p></p>段落标签
+	<b></b>，<strong></strong>加粗
+	<i></i>斜体
+	<hr/>水平线
+	<br/>换行
+2.	<img/> 图片标签
+    属性：src
+		  alt:替代文字
+		  title：移上去显示的文字
+		  width height :像素，or 百分比
+		  
+3.	<ol></ol> 有序列表
+	<ul></ul> 无序列表
+	常用子标签：
+		<li></li>
+	常用属性：
+		type
+	
+4.	<a></a> 超链接标签
+	属性：
+	
+		href :"#"当前页面
+		target 
+5.	<table></table>  表格标签
+	常用属性：
+		border
+		width
+		height
+		align :整个表格
+		
+		
+	子标签：
+		<tr></tr>  行
+		常用属性：
+			align:内容对齐
+		子标签：
+			<td></td>  列
+			<th></th> 表头 （居中并加粗）
+			td属性:
+				align 
+				rowspan:合并的行数
+				colspan：合并的列数
+6.	<form></form>  表单标签  用来从浏览器端收集用户数据
+	属性：
+		action :信息提交的路径 默认是当前页面
+		method :表单提交的路径 
+			get(默认) 和 post
+			区别：
+				1.get请求会把所有参数追加在地址栏上，post不会
+				2.get请求参数大小有限制，post没有
+				3.post相对安全
+	子标签：
+		<input>
+			属性：
+				type:
+					text文本框
+					password密码框
+					radio单选框
+					checkbox 复选框
+					file 文件
+					
+					submit:提交
+					reset:重置
+					button:普通按钮
+					
+					hidden:隐藏域  页面不显示 提交的时候可以提交过去
+					image:图片提交 替代submit
+					
+				name:
+					可以将几个单选框或者复选框设置为一组
+					要想将信息保存到服务器，必须有name
+				
+				value:
+					text password :设置默认值
+					radio Checkbox ：设置选中后提交的值
+					option:自定义提交的值
+					submit reset button：给按钮起一个可以显示的名字
+				readonly：
+					readonly = "readonly"  只读
+				disabled:
+					disabled = "disabled"  禁用
+			
+		<select>  下拉选
+			格式：
+				<select name = "">
+					<option>
+						
+					</option>
+				</select>
+	
+		<textarea>文本域
+			常用属性：
+				cols：列
+				rows: 行
+		提交到服务器的方式：
+			key=value&
+		a.对于文本框 密码框 文本域 手写的内容就可以传递过去了
+		b.但对于单选框和多选框，却没有把值传递过去
+			必须通过设置value = ...把值传递过去
+		c.若下拉中想要把选中的值传递过去，option加上value 属性
+		
+		默认值：
+			a.文本框 密码框 ：只需添加value属性
+			b.单选框 多选框 ：添加 checked = "checked"
+			c.下拉选：selected = "selected"
+		
+
+7. 开发一个后台管理系统，通过frameset实现
+	frameset:框架集  最好不与body并存
+		属性：
+			cols 垂直分割
+				cols="40%,60%"
+				cols="40%,*,10%"
+			rows:水平分割
+		子标签：
+			frame
+	frame:具体实现
+		属性：
+			src:展示页面的URL
+			name: 给当前的frame起个名称  方便超链接使用 a标签的target = "FrameName"
+			
+		frame里面千万不要有frameset
+		再切割就嵌套一个frameset 里面填充frame
+8.	转义字符：
+		三部分：&实体；
+		>: &gt;
+		<: &lt;
+		&: &amp;
+		空格：&nbsp;
+	
+	meta:
+		元信息
+		<meta charset="UTF-8">
+
+9.	<div></div>
+		块标签
+10.	<span></span>
+		行内的块标签
+11.	css:
+		格式：
+			选择器{属性：值；属性2：值2；}
+				id选择器：
+					通过 #id名称{...}引入
+				class选择器：
+					通过  .class名称{...}引入
+				元素选择器：
+					直接用元素（标签）名即可  xxx{...}
+					
+			派生的选择器：
+				属性选择器：
+					html元素必须有一个属性不论属性是什么且有值
+					css中通过   元素名[属性=“属性值”]{...}引入
+				后代选择器：
+					选择器 后代{...}
+				锚伪类选择器：--顺序不能变
+					a:link {color: #FF0000}		/* 未访问的链接 */
+					a:visited {color: #00FF00}	/* 已访问的链接 */
+					a:hover {color: #FF00FF}	/* 鼠标移动到链接上 */
+					a:active {color: #0000FF}	/* 选定的链接 */
+			
+			选择器的优先级：
+				标签 < 属性选择器 < class < id
+			
+			
+		和html整合：
+			a.内联样式表 （style 属性）
+			b.内部样式表 （当前页面使用的样式）
+				通过<head>的子标签
+					<style>
+						#div2{
+						}
+					</style>
+			c.外部样式表
+				通过<head>的link子标签
+					<link ref = "stylesheet" href=",,,"  type="text/css" />
+		
+		属性：
+			字体：
+				font-family：设置字体 
+				font-size：设置字体大小
+				font-style：设置字体风格
+			文本：
+				color: 设置文本颜色
+				line-height: 设置行高
+				text-decoration:  none 去掉下划线 
+				text-align: 对齐文本  (在一个div中，text-align直接将其内容对齐)
+			列表：
+				list-style-type: 列表项标志的类型   a 1 none(去掉圆点)
+				list-style-image: 将图片设置为列表项标志 使用的时候用url("/i/,,,")
+			背景：
+				background-color:设置背景颜色
+				background-image: 设置图片作为背景 url
+			尺寸：
+				width
+				height
+			浮动：
+				float: left right
+				clear: 设置元素的两边是否有其他的浮动元素，
+					值为both时，两边都不允许有浮动元素
+			分类：
+				display: none 设置是否及如何显示块级元素
+				block: 此元素将显示为块级元素，此元素前后带有换行符
+				inline: 被显示为内联元素  元素前后没有换行符
+
+12.	框模型：
+
+	一个element 外有padding margin border
+		padding :元素和边框的距离
+		margin： 元素和其他元素的距离
+		
+		这三个都有简写：
+			顺序: 上右下左
+			padding: 10px 代表四个边都是10
+			padding：10px 20px       上下10，左右20
+			padding: 10px 20px 30px  上10 下30 左右20
+		border: 宽度 风格 颜色
+			border：1px solid red
+				solid :实线
+				dashed: 虚线
+				double:双实线
+13.	在上面写的div中如果用了浮动，为保证下边的div不受影响：
+		加一个  <div class="cle" style="clear: both;"></div> ---清浮动
+14.	align 是标签属性
+	text-align是CSS属性，要加style=、、、
+15.	设置a标签的内容居中：在容纳她的div设置
+		height = 10px;
+		line-height = 10px;
+
+16.	js  --表单检验  是否完整
+	强类型语言：必须定义变量的类型
+	弱类型语言：var  var可省略
+	组成：
+		ECMAScript：js基础语法
+		BOM：(浏览器对象模型)
+		DOM:(文档对象模型)
+	作用：
+		修改html页面的内容
+		修改html的样式
+		完成表单的验证
+	js和html的整合： 
+		a. 在页面  放在<script></script>标签中  任何位置，一般放<head>中
+		b.	通过script标签的src属性引入
+			<script src = "js路径">用了路径，这里写了白写</script>
+		一个页面可以导入多个<script></script>
+17.	js中的变量声明：
+	var v1 = 初始值；
+	var v1;
+		v1 =初始值；
+	一行以分号结尾 可省略
+18. 数据类型：
+		原始类型：
+			Null
+			String
+			Number
+			Bool
+			Undefined ：未初始化
+				typeof()运算符可以判断一个值或者变量是否属于原始类型
+				typeof(null) 返回object
+		引用类型：
+		
+19.	js 事件驱动函数
+	函数定义格式：
+		1. function 函数名(){
+			函数体; 
+		}
+		注意：不需要返回值类型
+			  参数不需要加类型
+			  函数调用的时候：函数名（参数）
+		2. var 函数名 = function(){
+				函数体
+		   }
+20.	js 事件：
+		单击：onclick
+		表单提交事件：onsubmit  
+			加在form表单上  onsubmit=“return 函数名()”
+			函数返回值为boolean类型
+		鼠标双击：ondblclick
+		页面加载：onload
+		onchange
+	js 事件绑定函数：
+		方式一：
+			通过标签的事件属性 <xxx onclick="函数名（参数）"></xxx>
+		方式二：
+			给元素派发事件：
+				document.getElementById("id值").onclick = function（参数）{}
+				document.getElementById("id值").onclick = 函数名；
+					var 函数名 = function(){}
+			注意：
+				内存中应该有该元素才可以派发事件
+				a. 将方式二的js代码放在html页面的最下面
+				b. 在页面加载成功之后，再运行方式二的js代码 
+					在body的onload事件里写 onload = "init()"
+	js获取元素节点：
+		方式一：
+			var obj = document.getElementById("id值")
+		获取元素的value值：
+			obj.value; 
+		设置元素的value值：
+			document.getElementById("id值").value = ...
+		获取元素标签体：
+			obj.innerHTML;
+		设置元素标签体的内容：
+			document.getElementById("id值").innerHTML = "..."
+21.	轮播图
+		bom中的window对象的定时器方法
+		
+		定时器：
+			1. var id = setInterVal(code,毫秒数)  每隔指定的毫秒数执行一次函数 周期
+			2. var id = setTimeOut(code,毫秒数)	  延迟指定的毫秒数之后 只执行一次函数
+		清除定时器：
+			clearInterval(id);
+			clearTimeOut(id);
+		String对象
+			new String()
+			substring(0,endindex) 截取字符串
+22.	运算符：
+		比较运算符：
+			3>2
+			3>"2"
+			“ba” > "ab"
+			3>"as" 值永远是false
+		等号运算符：
+			==：值相等
+			===：不仅值相等，还要判断类型是否相同
+23.	语句
+		if while for switch(区别：后面可以跟字符串 ，和变量)
+24.	案例1：
+		a.确定事件
+		b.编写函数
+			获取元素    
+			操作元素
+		注意：
+			只要是window对象的属性，可以省略window
+				window.onload == onload
+				window.setInterVal == setInterVal
+	定时弹出广告：
+		html页面先将广告屏蔽->
+		页面加载成功事件 onload->
+		编写函数
+			定时器
+			操作元素：document.getElementById("")
+			操作css属性：document.getElementById("id").style.property="值"
+				属性就是css属性，css属性有"-",将"-"删除，后面第一个字母大写
+25.	bom（浏览器对象模型）：
+	所有的浏览器都有的5个对象：
+		window：窗口对象
+		location：定位信息 （地址栏）
+		history：历史
+		
+	window对象详解
+		如果文档包含框架（frame 或 iframe 标签），浏览器会为 HTML 文档创建一个 window 对象，并为每个框架创建一个额外的 window 对象。
+		常用属性：
+		
+			通过window可以获取其他四个对象：
+				window.location = location
+				window.history = history
+		常用方法：
+		
+			消息框：
+				alert（...）警告框
+				conform("你确定要删除吗？")确定框  返回值boolean 
+				prompt("请输入您的姓名：")输入框
+			定时器：
+				1. var id = setInterVal(code,毫秒数)  每隔指定的毫秒数执行一次函数 周期
+				2. var id = setTimeOut(code,毫秒数)	  延迟指定的毫秒数之后 只执行一次函数
+					例如：
+						setInterVal(showAd,4000)
+						setInterVal("showAd()",4000)
+				清除定时器：
+				clearInterval(id);
+				clearTimeOut(id);
+			打开和关闭：
+				open(url)
+				close
+				
+	location:定位信息
+		属性：
+			href:获取或设置当前页面的url（定位信息）
+			location.href :获取url
+			location.href = "..." 设置url  相当于a标签
+	
+	history:历史
+		back()：后退
+		forward():向前
+		go(int):
+			go(-1) ==back()
+			go(1) ==forward()
+
+26.	案例2-表单校验plus
+	提示信息不用弹出框，将信息追加在文本框后面
+	分析：
+		事件：  表单提交的时候 onsubmit
+				文本失去焦点的时候 onblur
+		编写函数：
+		获取元素
+			document.getElementById("id值")
+		操作元素（获取元素的值，操作标签体，操作标签value属性）
+27.	在function(this),this 指代的是当前的元素（当前dom对象）	
+		<input type="password" name="password" id="password" onblur="passLoseFocus(this.value)">
+		
+		function passLoseFocus(obj){
+			alert(obj);
+		}
+28.	事件总结：
+		焦点事件：
+			onfocus
+			onblur
+		表单事件：
+			onsubmit
+			onchange ：改变的时候  下拉选中用
+		页面加载事件：
+			onload
+				最常用的：window.onload = function(){}
+		鼠标事件：
+			onclick
+			
+			ondblclick
+			onmousedown
+			onmouseup
+			onmousemove  鼠标被移动
+			onmouseover  移到某元素上
+			onmouseout   移出某元素
+		键盘事件：
+			onkeydown:按下
+			onkeyup
+			onkeypress:按住
+29.	事件绑定函数：
+		1.元素的事件属性
+		2.派发事件
+		
+	阻止默认事件的发生
+30.	案例3-隔行换色
+	
+		获取元素：
+			document.getElementsByTagname("标签名") 通过标签名获取一种元素（多个）
+				返回一个数组
+				Array:
+					属性：length
+31.	案例4-全选或者全不选：
+		1.事件  最上面的复选框单击事件onclick
+		2.函数  所有的复选框和最上面的复选框保持一致
+			a.获取最上面的这个复选框的状态  checkbox的checked属性
+			b.获取其他的复选框 设置他们的checked属性
+				document.getElementsByClassName()    添加class属性
+				document.getElementsByName()   添加name属性
+32.	Dom(文档对象模型)
+		当浏览器接受到html代码的时候，浏览器会将所有的代码装载到内存，形成一棵document树
+		节点（node）
+			文档节点 document
+			元素节点 element 
+			属性节点 attribute
+			文本节点 text
+			
+		获取元素节点：
+			通过document可以获取其他节点
+				常用方法：	
+					dom对象  下面这些----
+					document.getElementsById("Id值")：获取  一个   特定的元素
+					document.getElementsByTagName("标签名") 通过标签名获取一种元素  （多个）
+					document.getElementsByClassName("class名")通过类名获取一类元素  （多个）
+					document.getElementsByName("name属性的值")通过name属性获取一类元素  （多个）
+						多个的返回是数组
+				
+				设置或者获取节点的value属性：
+					dom.value; 获取
+					dom.value = ""; 设置
+				设置或者获取节点的标签体：
+					dom.innerHTML;  获取
+					dom.innerHTML = "" ;  设置
+				获取或者设置style属性：
+					dom.style.属性;  获取
+					dom.style.属性 = "";  设置
+				获取或者设置属性：
+					dom对象.属性
+		对于html dom的操作若在html dom中查找不到，去查找xml dom中查找不到，去查找xml dom
+		关于文档的操作 在  xml dom的document中
+		关于元素的操作 在  xml dom的element中
+			appendChild(dom对象)：在一个元素下添加孩子
+			
+33.	案例5-左右选中
+	1.事件：按钮的单击事件
+	2.函数：
+		点击移动单个 | 多个：
+			a.获取左边选中的选项
+				select对象.options---数组
+				遍历数组，判断吧是否选中  option对象.selected
+			b.将其追加早右边的下拉选中
+				rightSelect对象.appendChild(option);
+		点击移动所有的：
+			a.获取左边选中的选项 
+			b.将其一个个追加过去
+
+34.	案例6-省市联动
+	选中省的时候，动态的查询当前省下的所有市
+	二维数组
+	
+		步骤：
+			1.省的下拉选，添加value属性 省的数组的index
+			2.省<select>添加 onchange 事件
+			3.函数：
+				通过省index获取相应市数组 this.value
+				遍历数组，组装成option 添加到select下
+	
+		
+35.	引用类型：
+		原始类型的String Number Boolean 都是伪对象，可以调用相应的方法
+		
+		Array 数组：
+			new Array();
+			new Array(size);
+			Array(element0, element1, ..., elementn);
+			非官方：
+				var arr =["a","sc"];
+			注意：
+				数组是可变的 （不存在越界）
+				数组可以存任意类型的值
+			方法：
+				存放值：对内容的操作
+					pop()   弹出数组最后一个元素
+					push()  插到数组最后
+					
+					shift :删除数组开头
+					unshift：插入到数组首位
+				打印数组：
+					join(分隔符)：将数组里的元素按照指定的分隔符打印
+						arr.join()
+				拼接数组：
+					concat():连接两个或更多的数组，并返回结果
+				对结构的操作：
+					arr.sort()  排序
+					arr.reverse()  反转
+					
+		String 
+			new String(值| 变量)  //返回一个对象
+			String(值| 变量)      //返回一个原始类型	
+			方法：	
+				substring(startindex,endindex ) 提取字符串中两个指定的索引号之间的字符 
+				substring(start,size)
+				charAt(index) 返回指定位置的字符
+				indexOf（""）返回字符串索引
+				replace() :替换与正则表达式匹配的子串。
+				split()  :把字符串分割为字符串数组。
+			
+			属性：
+				length
+				
+		Boolean 
+			语法：
+				new Boolean(值 | 变量);
+				Boolean(值 | 变量);
+				非0数字 非空字符串 非空对象  转成true
+				
+		Number
+			语法：	
+				new Number(值 | 变量);
+				Number(值 | 变量);
+				null ====>0
+				false=====>0
+				true=====>1
+				字符串数字=====>数字
+				其他====>NAN
+		Date:
+			方法：	
+				toLocaleString()  根据本地时间格式，把 Date 对象转换为字符串
+				
+		RegExp:
+			正则表达式，它是对字符串执行模式匹配的强大工具
+			语法：	
+				直接量语法：/正则表达式/参数
+				new RegExp("正则表达式")
+				new RegExp("正则表达式"，“参数”)
+				参数：
+					i: ignore 忽略大小写
+					g:  全局
+				方法：	
+					test()  检索字符串中指定的值 返回 true 或 false。
+		
+		Math:
+			Math.常量|方法
+				Math.PI
+				Math.random()  [0,1)
+		全局对象：
+			
+			encodeURI()	把字符串编码为 URI。
+			decodeURI()	解码某个编码的 URI。
+			
+			Number():强制转换
+			String():转换成字符串
+			
+			parseInt():尝试转换
+			parseFloat():
+			
+			eval():计算 JavaScript 字符串，并把它作为脚本代码来执行。
+		
+36.	---jQuery
+		jQuery和html的整合：
+			通过script标签的src属性引入
+		获取一个jquery对象：
+			$("选择器")  
+			jQuery("选择器")
+		 
+		dom对象转换成jquery对象之间的转换
+			dom对象======>jquery对象
+				$(dom对象)
+			jquery对象======>dom对象
+				1.jquery[index]
+				2.jquery.get(index)
+		页面加载：
+			js:  window.onload = function(){}  ---在一个页面中只可以写一个
+			jquery:
+				1.$(function(){} )   是下边的简写   -----在一个页面中可以使用多次
+				2.$(document).ready(function(){})
+		
+	派发事件：
+		$("选择器").click(function(){...});
+			== dom对象.onclick = function(){...}
+		掌握的事件：
+			 focus
+			 blur
+			 change
+			 click
+			 submit
+			
+37.jQuery效果
+		隐藏 或显示：
+			show(毫秒数)
+			hide(毫秒数)
+			toggle(毫秒):切换
+		滑如或滑出：
+			slideDown(毫秒数)：向下滑入
+			slideUp(毫秒数)：向上滑出
+		淡入淡出：
+			fadeIn(毫秒数):淡入
+			fadeOut(毫秒数)：淡出
+38.	选择器总结：
+		基本选择器：		
+			$("#id值")  $(".class值")  $("标签名")
+			$("*")	
+			$("#id值,.class值")
+		层次选择器：
+			a b:a 的所有b后代
+			a>b:a的所有b孩子
+			a+b:a的下一个兄弟--大弟弟
+			a~b:a的所有弟弟
+		基本过滤选择器：
+			:first 第一个
+			:last  
+			:odd    索引为奇数
+			:even   索引为奇数
+			:eq(index) 指定索引
+			:gt(index)  索引>0
+			:lt(indiex)
+		内容过滤：
+			:has("选择器") 包含指定选择器的元素  
+		可见过滤：
+			:hidden  在页面不展示元素  
+				一般指 input type=“hidden”
+				和样式中的display:none
+				jquery可以链式编程，后面.方法.方法
+			:visible
+		属性过滤器：
+			[属性名]
+			[属性名 = "值"]
+			
+		表单过滤：
+			:input    所有的表单自标签   input select  textarea  button
+				//input  标签 只匹配input
+		表单对象属性过滤选择器：
+			:enable    可用  
+				hidden visible针对可见不可见元素 <input type ="hidden"/>
+				display:none
+			:disabled  禁用
+			:checked  针对单选框和复选框
+			:selected  针对select 下拉选
+			
+39.	属性和css操作总结
+		对属性的操作：
+			attr():设置或者获取元素的属性
+				方式1：获取
+					attr("属性名称")
+				方式2：设置一个属性
+					attr("属性名称","值")
+				方式1：设置多个属性
+					attr({
+						"属性1"："值1",
+						"属性2"："值2",
+						})
+			removeAttr("属性名称"):移除指定属性
+			
+			------jq>1.6
+				用prop()操作属性
+					var $flag = $(this).prop("checked");
+					$(".itemSelect").prop("checked",$flag);
+					
+				jq 不传参的时候，this也指代dom 对象  $(this)转为jq对象
+				
+		//添加class属性的时候：
+			//attr("class","值")
+		addClass("指定的样式值")   ==  	attr("class","值")
+		removeClass("指定的样式值")
+			
+		对css操作：操作元素的style属性
+			css()：获取或者设置css样式
+			方式1：获取
+					css("属性名称")
+			方式2：设置一个属性
+				css("属性名称","值")
+			方式1：设置多个属性
+				css({
+					"属性1"："值1",
+					"属性2"："值2",
+					})
+		对位置進行操作：
+			posion()
+		对	尺寸操作：
+			height：
+			width:
+40.	jq的遍历方式：
+
+		数组.each(function(){});
+		$.each(遍历数组，function(){});	
+		
+	设置或者获取value属性：
+		jquery对象.val()  获取
+		jquery对象.val("...")   设置
+		
+	设置或者获取标签体的内容：
+		html()
+		text()
+		
+		xxxxx()  获取标签体的内容
+		xxxxx("   ")  设置标签体的内容
+		两者设置值的区别：
+			html：会把字符串解析
+			text: 只作为普通的字符串 
+		获取的区别：
+			html:获取的html源码
+			text:获取只是页面展示的内容
+	元素的插入：
+	
+			
+41.	jq在一个标签里添加一个标签：
+		$div.html($("<a href ='#'></a>").html("hahah"))
+	jq创建一个元素
+		$("<标签></标签>")
+		$("<标签名>").prop(属性).html(内容)  方便链式编程
+		
+42.	文档操作
+		内部插入：
+			a.append(c) :将c插入到a的内部（标签体）的后面
+			a.prepend(c):将c插入到a的内部（标签体）的前面
+			
+			a.appendTo(C)  ：相反 插入到谁的后面  插入到C的后面
+			preprndTo
+		外部插入：
+			a.after(c): 将c放到a的后面
+			a.before(c): 将c放到a的前面
+			
+			a.indertAfter(c)
+			a.indertBefore(c)
+		删除： 
+			empty()  清空元素
+			remove()   删除元素
+43. 案例1-表单检验-validate
+
+		jq插件 validate
+			需要导入jquery.js  validate.js  
+			页面加载成功后 对表单校验   
+				$("选择器").validate()
+			在validate中编写校验规则
+				$("选择器").validate({
+					rules:{
+					    //字段的name属性："校验器"  单个
+						//多个
+						字段的  name属性：{
+							校验器:"值",  ------bool 数字不加引号
+							校验器2:"值2"
+						}
+						
+					},
+					message:{					
+						//字段的  name属性："提示信息"  单个
+						//多个
+						字段的  name属性：{
+						    校验器:"提示信息",  
+						    校验器2:"提示信息2"
+						}
+						
+					}
+				});
+			
+			常见的校验器：
+				required:
+				min:
+				minlenhgh:
+				
+				range：
+				rangelength:
+				equalTo:$（jq表达式）
+		
+44.----hbuilder 记录：
+		导入：
+			文件系统，选择没有.project 的，然后css js img....会合并
+
+45.案例2-响应式页面  bootstrap
+
+	创建一套页面，可以根据上网设备的不同自动调节显示的效果
+	bootstrap:
+		web css 框架
+		集合了 html/css/jquery为一家
+		创建响应式页面
+		响应式：适配不同的上网设备
+		
+		导入：  ----先导入jq 不然bootstrap.js 引用错
+			<link rel="stylesheet" href="css/bootstrap.min.css" />
+			<script type="text/javascript" src="js/jquery-1.11.0.js" ></script>
+			<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		
+			<meta name="viewport" content="width=device-width,initial-scale=1">
+			
+		将所有内容放入布局容器中：
+			<div class = "container"></div>  或者
+			<div class = "container-fluid"></div>
+			
+		bootstrap将每一行分成12份
+		
+		媒体查询：	
+			假如大屏幕， 每行显示6个
+				超大屏幕，屏幕分辨率 >1200  使用：col-lg-2
+				
+			假如屏幕小一些， 每行显示4个
+				992<屏幕分辨率 <1200        使用：col-md-3
+				
+			假如大屏幕， 每行显示2个
+				768<屏幕分辨率 <992        使用：col-sm-6
+			继续小  每行显示1个
+				屏幕分辨率 <768            使用：col-xs-12
+		
+		有的特定的样式：lable标签 for = name/id...   class(样式)
+			<label for="sex" class="error"></label>
+			
+		bootstrap组成部分：
+			全局css样式  ---定义了一套css样式
+			组件   例如：字体图标，导航条,下拉菜单 ----复用
+			js插件 例如：轮播图， 选项卡---特定功能
+46.	栅格系统：
+		屏幕分辨率>1200  样式：col-lg-x
+		992<屏幕分辨率<1200  样式：col-md-x
+		768<屏幕分辨率<992 样式：col-sm-x
+		屏幕分辨率<768  样式：col-xs-x
+	隐藏：
+		hidden-xs|sm|...
+	
+	将一个超链接伪装成一个按钮：
+		class = "btn btn-primary"
+	浮动到右边：
+		class = "pull-right"
