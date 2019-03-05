@@ -1,0 +1,147 @@
+分层和事务
+
+1.案例-mvc思想完成转账操作
+	需求：在一个页面有汇款人，收款人，转账金额，一旦转账之后，汇款人金额减少，收款人金额增多，使用事务控制起来。
+	
+	技术：mvc思想
+	事务
+	
+///////////////////////////////////
+2. MVC：
+	将业务逻辑，代码，显示相分离的一种思想
+	
+	M:model 	模型	作用：主要封装数据，邓庄对数据的访问 --主要是类，dao..
+	V:view 		视图	作用：主要展示数据，一般是jsp担任的
+	C:controler 控制器	作用：接受请求，找到相应的javabean完成业务逻辑
+///////////////////////
+
+ mvc思想:
+	servlet--缺点：生成html内容太麻烦
+		|
+	jsp----缺点：阅读不方便，不方便维护
+		|
+	jsp+javabean:
+		jsp的model1:
+			jsp:接受请求
+			javabean:和数据打交道
+			
+		|
+	jsp+javabean+servlet:
+		jsp的model2:
+			jsp：展示数据
+			Javabean：和数据打交道
+			servlet:接受请求，处理业务逻辑
+
+///////////////////////////
+3. 反射：
+	1.获取class对象
+		方式1：❤
+			Class clazz = Class.forname("全限定名")
+		方式2：
+			Class clazz = 类名.Class();
+		方式3：
+			Class clazz = 对象.getClass();
+	2.获取对应类的构造方法
+		clazz.getConstructor(param.class)
+	3.clazz创建一个对象
+		clazz.newInstance(); //相当于调用无参的构造器
+	4.获取所有方法:共有的和私有的
+		公共的:
+			Method m = clazz.getMethod("sleep");
+			m.invoke(clazz.newInstance())
+		私有的：
+			clazz.getDeclaredMethod("sleep");  //获取任意修饰的方法
+			若是私有的，必须让该方法可以访问：
+				m.setAccessible(true);
+			m.invoke(实例对象))
+	5.	method 对象的invoke 是有返回值，他的返回值就是目标方法执行的返回值
+		
+	有了class对象 无所不能
+	
+//////////////////////////////
+4.	javabean 在model2中的使用：
+		BeanUtils:可以看做封装数据的一个工具类
+			使用：
+				1.导入jar
+				2.使用BeanUtils.populate(Object bean, Map map); --反射实现
+				
+5.  java ee的三层架构
+		web:
+			作用： 
+				展示数据---jsp 
+				
+				
+				---servlet---
+				接受请求
+				找到相应的service，调用方法， 完成逻辑操作
+				信息生成或者页面跳转
+				
+		service: 业务层 ---一切操作围绕service 需要哪些参数然后从servlet
+			作用： 
+				完成业务操作
+				调用dao
+				
+		dao(data access object 数据访问对象):
+			作用:
+				对数据库的crud操作
+
+6. 事务：
+		就是一件完整的事情，包含多个操作单元，这些操作单元要么全部成功，要么全部失败，
+		例如：转账 
+			包含转出操作和转入操作
+			
+		mysql中的事务:
+			mysql中的事务默认是自动提交，一条sql语句就是一个事务（不好）
+			开启手动事务方式：
+				方式1：关闭自动事务(了解，之后用java 控制)
+					set autoCommit = off
+						可以通过 show variables like “%autoCommit%” 查看
+					最后 commit；提交事务
+					注：换窗口就没用了
+					
+				方式2：手动开启一个事务（是一个事务）
+					start transaction;----开启一个事务
+					commit；---事务提交
+					rollback:事务回滚  --统统回滚到开启事务之前
+					
+			扩展：oracle中的事务默认是手动的 ，必须手动提交才可以
+			 
+		java中的事务：
+			Connection接口的API❤: 
+				setAutoCommit(false);  //手动开启事务
+				commit();  事务提交
+				rollback();  事务回滚
+				
+				//savepoint还原点
+				rollback(Savepoint savepoint)
+				setSavepoint():设置还原点
+
+/////////////////////////////////////////
+7. 案例-mvc思想完成转账操作
+		步骤：
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

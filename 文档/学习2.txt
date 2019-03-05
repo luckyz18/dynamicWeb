@@ -53,7 +53,7 @@
 			数据操作语言
 			操作对象：记录(行)
 			关键词：
-				 update delete
+				update delete
 			插入：
 				格式1：
 					insert into 表名 values(字段值1，字段值2，...,字段值n);
@@ -461,23 +461,7 @@
 					getObject	可以获取任意值
 					
 			
-///////////////////////////////////////////////////
-	***快捷键总结：
-	ctrl+shift+f :格式化代码
-	ctrl+o：整理包 这个类内的所有方法都会显示
-	alt+/ ：提示
-	ctr+1：快速锁定错误
-	alt+shift+a: 块编辑  不要用中文输入法
-	ctrl+2 L 
-	ctrl+shift+X :变大写
-	ctrl+shift+y:变小写
-	alt+ctrl+向下： 向下复制一行
-	shift+enter :向下添加一个空行
-	ctrl+d：删除一行
-	alt+向下:向下移动一行 
-	ctrl+o 调出他的所有的方法
-	
-	
+
 	
 ////////////////////////////////////////////////////////
 
@@ -587,6 +571,7 @@
 				常用方法：
 					query() r操作
 					update()  cud操作 在update里可以找到？设置参数的方法
+					
 			Dbutils: 类 释放资源  控制事务
 				closeQuietly(conn):内部处理了异常
 				commitAndClose(Connection conn): 提交事务 并释放连接
@@ -706,7 +691,15 @@
 
 		} 	
 	2.通过Class对象创建一个实例对象(相当于 new 类())
-		Object clazz.newInstance();  
+		Object clazz.newInstance(); 
+			==调用无参构造器：
+				con = clazz.getConstructer();
+				User a = con.newInstance;
+			如果是带参的构造器：
+				con = clazz.getConstructer(String.class,String.class);
+				User a = (User)con.newInstance("tom","123");
+				ysyo(a.getpassword())...
+				
 	3.通过Class 对象 获取一个方法
 		Method method = clazz.getMethod(“方法名”，Class .... param)
 			param为参数类型
@@ -921,8 +914,8 @@
 				格式：key=value
 				String value = request.getParameter("key")
 			往浏览器回写内容：
-				reponse
-				reponse.getWriter().print("success")
+				response
+				response.getWriter().print("success")
 				处理相应数据的乱码：
 					resp.setContentType("text/html;charset=utf8");
 		实现：	
@@ -971,8 +964,8 @@
 			servlet常用方法：
 				void init (ServletConfig config):初始化
 				void service (ServletRequest request,ServletResponse response):服务 处理业务逻辑
-				void destory():销毁
-				ServiceConfig getServiceConfig():获取当前servlet 的配置对象
+				void destroy():销毁
+				ServletConfig getServletConfig():获取当前servlet 的配置对象
 				
 			GenericService常用方法：
 				除了service方法没有显示 其他都已实现
@@ -1264,6 +1257,7 @@
 26.	通过response+servlet生成验证码
 		验证码：防止暴力攻击
 		动态的验证码
+		
 27. 案例2-完成注册操作
 	表单上填写用户数据，点击提交，将所有数据提交到服务器，通过java代码最终保存到数据库中
 	技术：
@@ -1307,12 +1301,12 @@
 					referer: 从哪个页面而来  防盗链
  
 		操作请求参数：
-			username=tom&password=123&hobby=drinhk&hobby=sleep
+			username=tom&password=123&hobby=drink&hobby=sleep
 			
 			常用方法：
 				String getParameter(String key) :获取一个
 				String[] getParameterValues(String key) :通过一个key获取多个值
-				Map<String,String[]> getParameterMap() :获取所有的采纳数名称和值
+				Map<String,String[]> getParameterMap() :获取所有的参数名称和值
 		
 		文件名称中文乱码：
 			对于get请求：参数追加到地址栏的时候会使用utf-8编码，但是服务器（tomcat7）接收到请求之后使用iso-8859-1解码，所以乱码了
@@ -1333,17 +1327,17 @@
 				URLEncoder.encode(s,"utf-8")
 				URLDecoder.decode(s,"iso-8859-1")
 29. map 
-		获取keySet 或者 valueSet  键值对没有对应关系
+		1.获取keySet 或者 valueSet  键值对没有对应关系
 			map.keySet()
 			map.valueSet()
-		通过key获取value:
+		2.通过key获取value:
 			map.get(key)  值可能有多个
 			
 		通过map.Entry 获得的是键值对
 			entrys = map.entrySet()
 			entry.getKey() entry.getValue()	
 			---可以放入迭代器中 
-				Map<String, String[]> map_ = request.getParameterMap();
+				Map<String, String[]> map = request.getParameterMap();
 				Iterator<Entry<String, String[]>> it = map.entrySet().iterator();
 				while(it.hasNext()){
 					Entry<String, String[]> entry = it.next();
@@ -1482,21 +1476,122 @@
 		
 		linkedList: 是一个双向链表 ，  主要用于操作数据
 	
+41. 案例2-清空浏览记录
+		cookie.setMaxAge(0)
+	采用覆盖的办法， 创建一个cookie，名字,路径都相同,c.setMaxAge(0),
+	写回浏览器，页面跳转
+	注意：
+		cookie不能跨浏览器
+		cookie中不支持中文
+		
+43.	案例3-添加到购物车
+		技术：session
+		
+		session:
+			服务器端会话技术
+			依赖于cookie
+			浏览器访问服务器，服务器获取jsessionId, 
+				若获取不到，
+					创建一个session，将数据保存，将当前jsession通过cookie返回给浏览器
+				若获取到：
+					拿着该jsession去session池中查找有无该session
+						若查找到：
+							直接拿过来使用，将jsessionid 写回浏览器 
+						查找不到：
+							创建一个session，将数据保存，将当前jsession通过cookie返回给浏览器
+					
+			
+			----当第一次访问的服务器的时候，服务器获取id,
+				能获取id
+					要拿着这个id去服务器中查找有无此session
+						若查找到了：直接拿过来，将数据保存，需要将当前session的id返回给浏览器
+						
+						若查找不到，创建一个session,将数据保存到这个session中，将当前session的id返回给浏览器
+				不能获取id
+					创建一个session,将数据保存到这个session中，将当前session的id返回给浏览器
+					
+			获取一个session：（上边的一堆）
+				HttpSession request.getSession() 
+ 
+			session域对象：
+				xxxAttribute
+				生命周期：
+					创建：第一次调用request.getsession()创建
+					销毁： 
+						服务器非正常关闭
+						session超时
+							默认时间超过30分钟 web.xml
+							手动设置超时：setMaxInactiveInterval(int 秒)
+						手动干掉session:
+							❤ session.invalidate()
+				存放私有数据
+				
+			
+	///////////////////////////////////////
+	/*
+		Map中不能存放int值 可以放integer
+		map放在堆内存中，他是一个地址  指向那块区域 ，直接操作即可，session中只是放了一个map的引用,所以取出操作不用再放回去了
+	
+	*/
+	1. 商品详情页面点击，提交到add2cartServlet
+		携带商品名
+	2. add2cartServlet 中的操作
+			获取商品名称；
+			将商品添加到购物车  购物车结构 map<string 名称，Integer 购买数量>；	
+			将购物车添加到session；
+	
+		商品添加到购物车：
+			获取购物车 
+			判断购物车是否为空：
+				空：
+					第一次添加，创建一个购物车；将当前商品put进去，数量1；将购物车放入session中
+					
+				不空：
+					继续判断购物车中是否有该商品
+					有：取出count   +1； 商品继续放入购物车中
+					无：商品put进去  数量1
 	
 	
+	3.点击购物车链接时：
+		从session 获取购物车
+			购物车空：提示信息
+			不空：遍历购物车  跳转到cart.jsp页面
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/////////////////////////////////////////////
+处理乱码：
+	request  乱码时，对于get请求 
+		name = request.getParameter("name");
+		name= new String (name.getBytes("iso8859-1"),"utf-8")
+		
+	request post请求时：
+		request.setCharacterEncoding("utf-8")
+		
+	response乱码时
+		response.setContentType("text/html;charset=utf-8");
+44. 案例3-清空购物车
+		思路1：将购物车移除
+		思路2：将session干掉
+			request.getSession().invalidate();
+
+			
+
+///////////////////////////////////
+
+	***快捷键总结：
+	ctrl+shift+f :格式化代码
+	ctrl+o：整理包 这个类内的所有方法都会显示  调出他的所有的方法
+	alt+/ ：提示
+	ctr+1：快速锁定错误 导入包
+	alt+shift+a: 块编辑  不要用中文输入法
+	ctrl+2 L 
+	ctrl+shift+X :变大写
+	ctrl+shift+y:变小写
+	alt+ctrl+向下： 向下复制一行
+	shift+enter :向下添加一个空行
+	ctrl+d：删除一行
+	alt+向下:向下移动一行 
+			
 	
 	
 	

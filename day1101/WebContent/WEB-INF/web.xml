@@ -19,4 +19,34 @@
     <servlet-name>GetProductByIdServlet</servlet-name>
     <url-pattern>/getProductById</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ClearHistoryServlet</display-name>
+    <servlet-name>ClearHistoryServlet</servlet-name>
+    <servlet-class>com.web.servlet.ClearHistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ClearHistoryServlet</servlet-name>
+    <url-pattern>/clearHistory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>add2CartServlet</display-name>
+    <servlet-name>add2CartServlet</servlet-name>
+    <servlet-class>com.web.servlet.add2CartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>add2CartServlet</servlet-name>
+    <url-pattern>/add2Cart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>clearCartServlet</display-name>
+    <servlet-name>clearCartServlet</servlet-name>
+    <servlet-class>com.web.servlet.clearCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>clearCartServlet</servlet-name>
+    <url-pattern>/clearCart</url-pattern>
+  </servlet-mapping>
 </web-app>

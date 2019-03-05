@@ -1,0 +1,291 @@
+1.域对象：
+	ServletContext:共享的数据
+	HttpServletRequest：一次请求的数据
+	HttpSession：私有的数据
+2.案例1-在页面中展示所有的商品信息  不使用jsp脚本
+	技术：jsp/el/jstl
+	
+	jsp: java 服务器页面
+		运行在服务器端 本质servlet ,产生的java文件和class文件在tomcat work目录下
+		<%...%> java程序片段
+			
+		<%=...%>输出表达式
+			相当于在java中调用out.print(...)
+		<%!...%> 声明成员
+		
+		jsp指令：
+			声明jsp页面的一些属性和动作
+			格式：
+				<%@指令名称 属性=“值” 属性=“值” %>
+				
+			jsp指令的分类：
+				page:声明jsp页面的一些属性
+				include:静态包含
+				taglib:导入标签库
+				
+			一个页面可出现多个指令
+	//////////////////////////////
+		1.page指令：
+			重要属性：
+				contentType:设置响应流的编码，及通知浏览器用什么编码打开 设置文件的mimeType
+				
+				import:导入所需的包
+				contenType和pageEncoding联系：
+					两者都出现，各自使用各自编码
+					若只出现一者，两个都使用这个编码
+					若两者都不出现，使用服务器默认的编码 tomcat7 （iso8859-1）
+			了解：
+				language:当前jsp里面可以嵌套的语言 （实际只有java）
+				buffer: 设置jsp页面流的缓冲区
+				autoFlush:自动刷新
+				extends:继承哪个类 ，必须继承的是httpServlet 及其子类
+				session: 设置jsp页面是否可以使用session内置对象
+				isELIgnored：是否忽略EL表达式
+				isErrorPage:当前页面是否是一个错误页面，当值为true时，可以使用jsp页面的内置独对象-exception
+				errorPage:当前jsp页面出现异常的时候，跳转到哪个
+		2.include指令：
+			静态包含，将其他页面或者servlet的内容包含进来，一起进行编译运行，生成一个.java文件
+			格式：
+				<%@ include file="相对路径或者内部路径" %>
+				例：<%@ include file="/jsp/include/include.jsp" %>
+			路径：
+				相对路径：
+					/或者什么都不写 当前路径
+					../上一级路径
+				绝对路径：
+					带协议和主机的绝对路径
+					不带协议和主机的绝对路径
+						/项目名/资源
+				内部路径：
+					不带协议和主机的绝对路径去掉项目名
+						请求转发 静态包含 动态包含
+				
+		3.taglib指令：导入标签库
+			格式：
+				<%@ tablib prefix="前缀名" uri="名称空间"%>
+				若导入之后：<前缀名：标签..>
+				
+		///////////////////////////////////////////////
+		jsp内置对象：❤❤（9大内置对象）：
+			在jsp页面可以直接使用的对象：
+									类型
+				1.out           	JspWriter
+				2.request   		HttpServletRequest
+				3.response			HttpServletResponse
+				4.session			HttpSession
+				
+				5.exception(只有Iserrorpage)    Throwable
+				
+				6.page(=java 中的this)   Servlet(this)
+				7.config				 ServletConfig
+				8.application			 ServletContext
+				
+				9.pageContext            PageContext
+				
+			jsp的域对象：
+				application     整个项目
+				session			一次会话
+				request			一次请求
+				pageContext		一个页面
+				
+				pageContext:
+					1.域对象
+						xxxAttribute()
+					2.操作其他域对象
+						方法：
+							xxxAttribute(...,int scope)
+								scope取值：
+									Application_scope
+									session_scope
+									request_scope
+									page_scope
+									
+					3.获取其他内置对象
+						getxxx():
+							getRequeat():获取request内置对象
+					4.便捷查找
+						pageContext.findAttribute("rkey")   key相同时，先从小域查找,查找不到返回null
+						查找的顺序是 pagecontext，request，session，application
+						
+		jsp的动作标签：
+			<jsp:forward>:请求转发   相当于java中 request.getRequeatDispatcher(..内部路径.).forward(request,response);
+			
+			<jsp:include>:动态包含  
+				就是将被包含页面或者servlet的运行结果包含到当前页面中，，内部路径
+3.EL：
+	jsp内置表达式语言
+	用来替代<%=...%>
+	作用：
+		1.获取域中的数据❤
+		2.执行运算❤
+		3.获取常见的web对象
+		4.调用java的方法
+		
+	格式：	
+		${el表达式}
+	
+	获取域中的数据：❤
+		1.1获取简单数据
+			$(pageScope| requestScope | sessionScope |pageContextScope.属性名);
+			
+			便捷获取：
+				$(skey)
+				当key值一样时，他的底层是 findAttribute  
+					$(属性名)：依次从pageCOntext.request,session,application查找指定字符串，查找不到返回“”
+				
+		1.2获取复杂数据
+			获取数组数据
+				${域中的名称[index]}
+			获取list数据
+				${域中的名称[index]}
+			获取map
+				${域中的名称.键}
+			获取特殊名字的数据：
+				比如属性名中出现了".  | + -"特殊符号，需要用scope获取，
+					${requestScope["user.age"]}
+				
+		1.3Javabean导航 
+			Javabean：java语言编写的一个可重用组件
+				就是普通编写的java类 例如：User Person
+				javabean 规范：
+					1.必须是公共的具体的类 public class
+					2.提供私有字段 private String id；//id 叫做字段
+					3.提供公共访问字段的方法 get|set|is 方法
+						public String getName(){..}
+						一旦有公共的方法之后 get|set|is 之后的内容，将首字母小写，将这个东西称之为bean属性   name就是一个bean  属性,即使可能没有这个字段，称之为属性
+						
+						把Javabean放入域中，获取的时候是  ${域中的名称.bean属性},注意不是字段,相当于user.getxxx
+					4.提供一个无参的构造器
+					 5.一般实现序列化接口   serializable
+	
+	执行运算：
+		四则运算，关系运算，逻辑运算，
+		注意：
+			+：只能进行加法运算，字符串形式的数字可以也进行加法运算，
+			empty:判断一个容器的长度是否为0 （array set list map）,还可以判断一个对象是否为空
+				${empty 域中对象名} 
+				list.add()
+			三元运算符：${3>4?y:n}
+			
+////////////////////////////////////////
+	el的内置对象（了解）：
+		11个
+			 
+			
+			param ：和参数相关的内置对象  获取的是map			
+			paramValues   ~=parameterMap   map，值是数组形式
+				${param.username} 
+				${param}
+				${paramValues}  
+				${paramValues.hobby[0]}
+			
+			header：和请求头相关的内置对象
+			headerValues
+				${header}
+				${HeaderValues}
+				${header.refer}
+				${headerValues["user-agent"]}  //特殊符号  用[]
+			
+			initParam
+				
+			cookie❤
+				${cookie} 获取map{k1=cookie}
+					例如创建cookie
+						Cookie c = new Cookie("username","tom");
+					通过${Cookie} ==
+						{username = new Cookie("username","tom")}
+						即：map的key是cookie的键
+							map的value是当前cookie
+					
+				若想获取名称username的cookie的value值（tom）
+					${cookie.username.value}----javabean导航
+					
+						cookie中 ：getName()  getValue() name|value是cookie的bean属性
+				使用cookie内置对象：
+					${cookie.给Cookie起名字.value}
+					例：${cookie.JSESSIONID.value}
+				
+			
+			pageContext❤
+				获取的不是map集合，相当于jsp的pageContext内置对象
+				jsp页面获取项目名称：${pageContext.request.contextPath}
+			
+			注意：
+				除pageContext，其余对象获取的全是map集合		
+				
+////////////////////////
+jsp注释：
+	Ctrl+Shift+/
+	
+4. jstl
+		jsp标准的标签库语言
+		用来替代java脚本
+		
+		使用：
+			1.导入jar(jstl standard)
+			2.页面导入标签库
+				<%@ taglib prefix="" uri=""%>
+		jstl分类：
+			core 核心库类❤
+			fmt ：格式化。国际化
+			
+		core:
+			c:if❤	
+			c:foreach❤
+	
+		c:if
+			<c:if test="${3>4}"> 
+				3>4
+			</c:if>
+		
+		c:foreach 循环
+			<c:forEach begin="1" end="20" step="2" var="i" varStatus="vs">
+				${i }-${vs.count }-${vs.current}<br>
+			</c:forEach>
+			
+			vs记录循环状态：
+				count ：记录次数
+				current:当前遍历的内容
+			
+			//复杂的  list set map(取值类似于entry)
+			<c:forEach items="${map}" var="i" >
+				${i.key}-${i.value}}<br>
+			</c:forEach><br>
+			
+5.案例-展示所有商品	
+		day1201
+6.案例-重写登录案例
+		需求：
+			页面上填写用户名和密码及验证码，点击提交，先校验验证码是否一致，若一致后再去查找数据库，顺便记住用户名，
+		技术：
+			表单
+			验证码
+			servlet
+			request
+			session (放验证码，不放入session因为验证码加载出来的时候这次请求响应就完成了)
+			
+			Cookie(记住用户名和密码)
+			
+		步骤：
+			1.数据库 表
+			2.项目 
+			3.表单 login.jsp
+			4.表单提交到loginservlet
+				获取验证码 （前台传过来的 和session中 ）
+					判断一致？
+						N：填写错误信息，放在request域中，请求转发login.jsp
+						Y：获取用户名 密码，UserSevice。。。
+							user==null?
+								Y:填写错误信息,请求转发login.jsp	
+								N:
+									是否勾选记住密码？
+										Y:创建cookie 将用户名放入cookie,写回浏览器
+									将User对象放入session中，页面重定向到 index.jsp ,展示xxx欢迎回来	
+	
+	
+	
+	
+	
+	
+	
+		
