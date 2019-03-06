@@ -12,7 +12,7 @@
 	
 	M:model 	模型	作用：主要封装数据，邓庄对数据的访问 --主要是类，dao..
 	V:view 		视图	作用：主要展示数据，一般是jsp担任的
-	C:controler 控制器	作用：接受请求，找到相应的javabean完成业务逻辑
+	C:controler 控制器	作用：接受请求，找到相应的 javabean 完成业务逻辑
 ///////////////////////
 
  mvc思想:
@@ -106,7 +106,7 @@
 					
 			扩展：oracle中的事务默认是手动的 ，必须手动提交才可以
 			 
-		java中的事务：
+		java中的事务❤：
 			Connection接口的API❤: 
 				setAutoCommit(false);  //手动开启事务
 				commit();  事务提交
@@ -115,33 +115,173 @@
 				//savepoint还原点
 				rollback(Savepoint savepoint)
 				setSavepoint():设置还原点
+				
+			如何使用同一个连接：
+			1.向下传递参数
+			2.可以将connection对象绑定当前线程，
+			  jdk中有一个ThreadLocal类	
+	
+		
 
 /////////////////////////////////////////
 7. 案例-mvc思想完成转账操作
 		步骤：
 		
+		dao:一旦出现异常 钱就飞了
+			要想避免这种事情  service层添加事务,为了保证所有的操作用的是一个连接（一个事务）,在service层获取了连接，向下传递参数.  在service层释放连接
+			ThreadLocal实例通常是希望将状态与线程关联的类中的私有静态字段（例如，用户ID或事务ID）。ThreadLocal实例通常是希望将状态与线程关联的类中的私有静态字段（例如，用户ID或事务ID）。
+
+			ThreadLocal的方法：
+				构造方法：
+					new ThreadLocal()
+				set(Object value):将内容和当前线程绑定
+				Object get():获取和当前线程绑定的内容
+				remove() ：将当前线程和内容解绑
+				
+			内部维护了map集合：
+				map.put(当前线程,内容)
+				map.get(当前线程)
+				map.remove(当前线程)
 		
+		java -（当是jsbc时）中添加事务：
+			已经在day13的DataSourceUtils工具类实现
+		
+			提交--转账操作都完成
+			回滚--有异常
+		
+/////////////////////////
+DButils:
+	1.创建queryRunner
+	2.编写sql
+	3.执行sql
+	
+QueryRunner:
+	构造：
+		new QueryRunner(DataSource ds):
+			自动事务 ，
+			调用方法的时候 不需要传入connection.
+			资源不用我们释放
+		
+		new QueryRunner():
+			手动事务，		
+			调用方法必须传入connection,
+			需手动提交或者回滚事务；
+			必须手动释放资源
+		
+	常用方法：
+		update(Connection conn,String sql,Object...param) :执行cud操作
+		query()
+	
+//////////////////////////////
+8. 事务总结：
+	事务的特性：❤❤❤
+		ACID
+		原子性：事务里面的操作不可切割，要么全部成功，要么全部失败
+		一致性：事务执行前后，业务状态和其他业务保持一致
+		隔离型：一个事务执行的时候，最好不要受到其他事务的影响
+		持久性：一旦事务提交或者回滚，这个状态都要持久化到数据库中
+	
+	不考虑隔离会出现的读问题：❤❤
+		脏读：
+			在一个事务中读取到另一个事务没有提交的数据
+		不可重复读：
+			在一个事务中，两次查询的结果不一致(针对update操作)
+		虚读（幻读）：
+			在一个事务中，两次查询的结果不一致(针对insert操作)
 
+	通过设置数据库的隔离级别来避免上面的问题(了解)
+		read uncommited  读未提交  上面三个问题都会出现
+		read commited    读已提交   可以避免脏读 ，但是会有不可重复读
+		repeatable read  可重复读   可以避免脏读和不可重复读的发生
+		serializable     串行化(锁表的操作。不好)     可避免所有问题。优先级和安全性
+	
+	
+	开发中：read commited ，repeatable read
+	mysql中的默认：repeatable read
+	oracle默认：read commited
 
+	java中控制隔离级别（了解）：
+		Connection API
+9.  四天总结
+servlet
+	创建 
+	更改web.xml
+	servletContext:全局管理者 上下文 --当前项目的引用
+		资源共享（域对象）
+		获取资源文件
+			getRealPath()    --资源下载
+			getResourceAsStream()
+		获取mimeType
+			getMimeType()
+		
+		面试：
+			servlet生命周期
 
+rr:
+	request:获取浏览器发送过来的数据
+		
+	response:往浏览器写东西
+		重定向：response.sendRedirect(绝对路径)
+			请求转发 请求包含--内部路径
+			其他一律绝对路径
+		定时刷新：refresh
+			setHeader("refresh","秒数";url="跳转路径")
+			meta
+		getWriter():字符流
+		getOutputStream():字节流
+		
+		文件下载：
+			setContentType(mime类型)
+			setHeader("content-disposition","attachment;filename="+文件名);
+				文件名称乱码问题
 
+	request:
+		获取参数：3个
+			中文乱码：
+				通用方法：
+					new String (名字.getBytes("iso-889=1"),"utf-8");
+				针对post:
+					request.setCharacterEncoding("utf-8")
+			请求转发：
+				request.getRequestDispatcher(内部路径).forword(....)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+cookie session:
+	cookie：
+		常用方法：	
+			new cookie(String key,String value)			
+			response.addCookie(Cookie c)
+			request.getcookies()
+			cookie的api
+				getName()
+				getValue()
+				
+				setMaxAge(int 秒)
+				setPath(string path)  //当访问的路径里包含这个路径 就会携带cookie
+				
+	session:
+		常用方法：	
+			获取session:
+				request.getsession()
+			域对象：
+				私有数据 
+				xxxAttribute()
+				创建 ：
+				销毁 ：
+					1 
+					2 
+					3. session.invalidate()
+		登录 购物车...
+		
+jsp el jstl:
+	jsp的指令： include taglib
+	jsp的内置对象 (仅面试)
+	jsp:forward
+	jsp:incldue
+	
+	el：全部
+		获取数据
+		执行运算
+	jstl:
+		if 
+		foreach
 
