@@ -53,7 +53,7 @@
 			数据操作语言
 			操作对象：记录(行)
 			关键词：
-				update delete
+				update delete,insert
 			插入：
 				格式1：
 					insert into 表名 values(字段值1，字段值2，...,字段值n);
@@ -1580,10 +1580,12 @@
 
 	***快捷键总结：
 	ctrl+shift+f :格式化代码
-	ctrl+o：整理包 这个类内的所有方法都会显示  调出他的所有的方法
+	ctrl+o：整理包 这个类内的所有方法都会显示 
+	调出他的所有的方法
+	ctrl+shift+o :导入
 	alt+/ ：提示
 	ctr+1：快速锁定错误 导入包
-	alt+shift+a: 块编辑  不要用中文输入法
+	alt+shift+a: 块编辑  不要用中文输入法	退出再按一次
 	ctrl+2 L 
 	ctrl+shift+X :变大写
 	ctrl+shift+y:变小写

@@ -150,7 +150,7 @@
 			回滚--有异常
 		
 /////////////////////////
-DButils:
+DButils使用事务:
 	1.创建queryRunner
 	2.编写sql
 	3.执行sql
@@ -168,12 +168,16 @@ QueryRunner:
 			需手动提交或者回滚事务；
 			必须手动释放资源
 		
-	常用方法：
-		update(Connection conn,String sql,Object...param) :执行cud操作
+	手动常用方法：
+		update(Connection conn,String sql,Object...param) :执行cud操作 //要写connection
 		query()
 	
 //////////////////////////////
 8. 事务总结：
+	事务中要想保证在一个事务中，必须保证使用同一个连接
+		1 向下传递参数
+		2 绑定线程
+	
 	事务的特性：❤❤❤
 		ACID
 		原子性：事务里面的操作不可切割，要么全部成功，要么全部失败
@@ -202,7 +206,7 @@ QueryRunner:
 
 	java中控制隔离级别（了解）：
 		Connection API
-9.  四天总结
+9.  四天总结 
 servlet
 	创建 
 	更改web.xml

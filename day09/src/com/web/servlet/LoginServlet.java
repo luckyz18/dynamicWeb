@@ -54,8 +54,6 @@ public class LoginServlet extends HttpServlet {
 			Integer count_now = (Integer) context.getAttribute("count"); //注意: 尽量用Integer 因为null不能赋给int 可以赋给Integer
 			count_now += 1;
 			context.setAttribute("count", count_now);
-			
-//			System.out.println(count_now);
 			System.out.println("登录成功");
 		}
 		
