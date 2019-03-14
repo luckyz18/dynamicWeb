@@ -1516,13 +1516,13 @@
 			session域对象：
 				xxxAttribute
 				生命周期：
-					创建：第一次调用request.getsession()创建
+					创建：java中 第一次调用request.getsession()创建
 					销毁： 
-						服务器非正常关闭
-						session超时
+						1.服务器非正常关闭
+						2.session超时
 							默认时间超过30分钟 web.xml
 							手动设置超时：setMaxInactiveInterval(int 秒)
-						手动干掉session:
+						3.手动干掉session:
 							❤ session.invalidate()
 				存放私有数据
 				

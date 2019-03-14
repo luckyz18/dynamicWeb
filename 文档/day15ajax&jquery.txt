@@ -96,4 +96,24 @@ json：
 			JSONArray.fromObject(对象)  对象是---数组和list  
 			JSONObject.fromObject对象)			bean和map
 			
-	
+/////////////////////////
+jquery:
+	$("选择器") 获取jquery对象
+	jq对象--》dom对象：
+		1.jquery对象.get(index)
+		2.jquery对象[index]
+	dom对象-->jquery对象:
+		$(dom对象)
+		
+	页面载入：
+		$(function(){  })
+		
+	派发事件：
+		jquery对象.事件(function(){...});
+		
+	选择器：
+		#id  .class  标签名  [属性]   元素名[属性=“属性值”]  
+		a b:后代  a>b:孩子  a+b: 大弟弟  a~b:所有弟弟
+		：first  :last   :odd  :even  :eq|gt|lt(index)
+		参考学习1...
+		

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>day16listener</display-name>
+  <filter>
+    <filter-name>HelloFilter</filter-name>
+    <filter-class>com.filter.HelloFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>HelloFilter</filter-name>
+    <url-pattern>/demo1</url-pattern>
+  </filter-mapping>
+ <!--  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping> -->
+  <filter>
+    <filter-name>LoginEncodeFilter</filter-name>
+    <filter-class>com.filter.LoginEncodeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginEncodeFilter</filter-name>
+    <url-pattern>/loginEncode</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Demo1Servlet</display-name>
+    <servlet-name>Demo1Servlet</servlet-name>
+    <servlet-class>com.web.servlet.Demo1Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Demo1Servlet</servlet-name>
+    <url-pattern>/demo1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Demo2Servlet</display-name>
+    <servlet-name>Demo2Servlet</servlet-name>
+    <servlet-class>com.web.servlet.Demo2Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Demo2Servlet</servlet-name>
+    <url-pattern>/a/b/demo2</url-pattern>
+  </servlet-mapping>
+  <!-- <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.web.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping> -->
+  <servlet>
+    <description></description>
+    <display-name>LoginEncodeServlet</display-name>
+    <servlet-name>LoginEncodeServlet</servlet-name>
+    <servlet-class>com.web.servlet.LoginEncodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginEncodeServlet</servlet-name>
+    <url-pattern>/loginEncode</url-pattern>
+  </servlet-mapping>
+</web-app>

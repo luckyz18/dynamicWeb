@@ -1,0 +1,163 @@
+1. listener(了解)：
+	监听器
+	作用：监听web中的域对象  servletContext  ServletRequest  HttpSession
+
+	监听内容：
+		a.监听3个对象的创建和销毁
+			ServletContextListener:
+				以后用来加载配置文件
+			ServletRequestListener
+			HttpSessionLiistener
+			
+		b.监听3个对象属性的变化
+			ServletContextAttributeListener
+			ServletRequestAttributeListener
+			HttpSessionAttributeListener
+			
+		c.监听session中javabean的状态
+			HttpSessionActivationListener(钝化和活化)：
+				钝化：javabean从session中序列化到磁盘
+				活化：javabean从磁盘上加载到session中
+				
+				可以手动通过修改配置文件 修改javabean什么时候钝化，节省服务器内存：
+					修改一下目录：
+						meta-info  下创建一个 context,xml
+						内容：
+							<Context>
+							<!--
+								maxIdleSwap	:1分钟 如果session不使用就会序列化到硬盘.
+								directory	:itheima 序列化到硬盘的文件存放的位置.
+							-->
+							<Manager className="org.apache.catalina.session.PersistentManager" maxIdleSwap="1">
+								<Store className="org.apache.catalina.session.FileStore" directory="itheima"/>
+							</Manager>
+</Context>
+
+			HttpSessionBindingListener(绑定和解绑)
+		
+		注意：listener 全部都是接口
+		
+		使用步骤：
+			编写一个类 实现接口
+			重写方法
+			编写配置文件
+	
+	
+
+
+2. filter(❤)过滤器：
+		过滤请求和响应
+		作用： 
+			自动登录.
+			统一编码。
+			过滤关键字
+		Filter是一个接口
+		
+	编写filter步骤：
+		1 编写一个类
+			实现filter接口
+			重写方法
+		2 编写配置文件
+			注册filter
+			绑定路径
+		3 测试
+	
+	
+	filter接口的方法：
+		1 .init(FilterConfig filterConfig) 初始化操作
+		2 .doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 处理业务逻辑，实现过滤功能，该方法就是对每个请求及响应增加的额外处理。
+		chain过滤链，按照xml里的  一次执行里边的dofilter()方法	
+		3 .destroy()
+		
+	filter chain: 过滤链
+		通过chain 的dofilter方法，可以将请求放行到下一个过滤器，直到最后一个过滤器放行才可以访问到servlet|jsp . 
+		doFilter()  放行
+		
+	url-pattern 配置
+	3种
+		完全匹配： 必须以“/”开始 例如 ：/a/b
+		目录匹配:   必须以"/"开始  例如：/a/*
+		后缀名匹配: 以"*." 开始 以字符结束  例如： *.jsp  *.do
+		
+	例：
+		afilter  路径  /*
+		bfilter  路径  /demo4
+		一个资源可能被多个过滤器匹配成功，多个过滤器的执行顺序是按照web.xml 中的filter-mapping的顺序执行的
+	
+	
+	
+	访问过程：
+		1./day16/demo1  ----> demo1Servlet
+				        <----
+	
+		2./day16/demo1  ----> filter(检测到若有这个路径) 放行 (请求)----> servlet
+						<----			                  (收到响应)<----
+	
+	
+案例1-自动登录
+	关闭浏览器，下一次完成登录操作
+	技术：
+		filter
+		cookie
+	///////////////////////////
+	
+	步骤分析：	
+		1数据库 表  jar  工具类
+		2 表单页面 
+		3 loginservlet
+			接受用户名 密码 
+			调用service  返回user
+			user = null?
+				N: user放入session中  
+					判断是否勾选了自动登录？
+						Y: 用户名 密码 写回浏览器
+		4. 下次访问网站 
+			拦截任意请求
+			判断有无指定cookie 
+				有，获取用户名 密码
+				service完成登录  返回user
+				user = null? 
+					N :user 放入session中
+			
+会出现问题：
+	当换用另一个用户登录的时候，发现登录不了
+		自动登录只需要登录一次：当session中没有用户的时候
+		访问有些资源是不需要自动登录的，（和登录还有注册相关的资源）
+		
+		修改filter的逻辑：
+			首先判断session中是否有user
+				若没有，并且访问的路径不是和登录注册相关的时候
+					才去获取指定的cookie
+
+案例2-cookie中有中文
+		首先要编码  
+		Cookie c = new Cookie("savename",URLEncoder.encode(username, "utf-8"));	
+		
+		在显示时借助js对象：
+		var s = "${cookie.savename.value}";
+    	s  =decodeURI(s);
+			
+			
+filter总结：
+	filterConfig: 过滤器的配置文件
+		获取全局管理者
+		获取当前filter名称‘
+	filter-mapping 子标签：
+		servlet-name: 匹配的那个servlet名称   跟url-pattern 都可以匹配
+		dispatcher: 匹配哪种请求  默认第request  有时候有forward  需要都写上
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
