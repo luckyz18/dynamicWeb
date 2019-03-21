@@ -76,7 +76,7 @@ class Myrequest extends HttpServletRequestWrapper{
 		}
 		Map<String, String[]> map = getParameterMap();
 		if (map == null && map.size()==0) {
-			return null;
+			return null; 
 		}
 		return map.get(name);
 	}

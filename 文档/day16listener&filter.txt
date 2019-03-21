@@ -128,8 +128,8 @@
 			首先判断session中是否有user
 				若没有，并且访问的路径不是和登录注册相关的时候
 					才去获取指定的cookie
-
-案例2-cookie中有中文
+					
+	cookie中有中文
 		首先要编码  
 		Cookie c = new Cookie("savename",URLEncoder.encode(username, "utf-8"));	
 		
@@ -145,10 +145,28 @@ filter总结：
 	filter-mapping 子标签：
 		servlet-name: 匹配的那个servlet名称   跟url-pattern 都可以匹配
 		dispatcher: 匹配哪种请求  默认第request  有时候有forward  需要都写上
+			&
+			ERROR：服务器错误时 显示的那个页面
+			INCLUDE：
 			
+案例2- 统一字符编码
+	需求：通过过滤器设置，到servlet或者jsp上已经没有乱码
+
+	技术分析：
+		filter  配置路径 /*  过滤器的第一个位置
+		在filter 中重写getParameter(加强）
+	
+		方法加强：
+			1：继承（获取构造器）
+			2：装饰者模式（静态代理）
+			3：动态代理
 			
-			
-			
+		装饰者书写步骤：
+			1：要求装饰者和被装饰者实现同一个接口或者继承同一个类
+			2：装饰者和被装饰者要有被装饰者的引用
+			3：对需要加强的方法进行加强
+			4：对不需要加强的方法调用原来的方法
+ 			
 			
 			
 			
