@@ -65,6 +65,7 @@ public class Upload2Servlet extends HttpServlet {
 		
 		//删除临时文件
 		part.delete();	
+		//test git
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
