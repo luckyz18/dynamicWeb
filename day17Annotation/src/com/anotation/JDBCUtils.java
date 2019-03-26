@@ -17,8 +17,8 @@ public class JDBCUtils {
 		//从注解上获取4个参数
 		Method m = clazz.getMethod("getConnection");
 		
-		if (m.isAnnotationPresent(JDBCInfo.class)) {
-			JDBCInfo info = m.getAnnotation(JDBCInfo.class);
+		if (m.isAnnotationPresent(JDBCInfo.class)) {    //m 上 是否有 JDBCInfo的注解
+			JDBCInfo info = m.getAnnotation(JDBCInfo.class);  //对应用了注解的m 进行反射操作
 			
 			String driverClass = info.driverClass();
 			String url = info.url();
