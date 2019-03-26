@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import sun.nio.ch.IOUtil;
  *	 随机文件名  随机路径
  */
 @WebServlet("/upload2")
+@MultipartConfig
 public class Upload2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,7 +49,9 @@ public class Upload2Servlet extends HttpServlet {
 		
 		//2.3 获取文件存放目录
 		String dir = UploadUtils.getDir(realname);
-		String realPath = this.getServletContext().getRealPath("/upload"+dir);
+		String realPath = this.getServletContext().getRealPath("/upload"+dir);  //拼接成完整路径
+		
+		
 		File file = new File(realPath);
 		
 		if (!file.exists()) {
@@ -58,7 +62,7 @@ public class Upload2Servlet extends HttpServlet {
 		
 		//流
 		InputStream is = part.getInputStream();
-		FileOutputStream os =  new FileOutputStream(new File(file,uuidName));
+		FileOutputStream os =  new FileOutputStream(new File(file,uuidName));   //构造器   跟上一个文件的目录  +  真实名称
 		IOUtils.copy(is, os);
 		os.close();
 		is.close();
@@ -66,7 +70,9 @@ public class Upload2Servlet extends HttpServlet {
 		//删除临时文件
 		part.delete();	
 		//test git
-	}
+	
+	}	
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

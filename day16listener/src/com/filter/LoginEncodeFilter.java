@@ -106,7 +106,7 @@ class Myrequest extends HttpServletRequestWrapper{
 				}
 			}
 			
-			flag= false;   //避免重复编 码  ？
+			flag= false;   //避免重复编码 ？
 		
 		}
 		return super.getParameterMap();

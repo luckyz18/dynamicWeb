@@ -9,7 +9,7 @@
 <body>
 	<form action="${pageContext.request.contextPath }/upload2" method="post" enctype="multipart/form-data">
 		用户名: <input type="text" name="username" /><br>
-		文件名称<input type="file" name="f" ><br>
+		<input type="file" name="f" ><br>
 		<input type="submit" value="提交">
 	</form>
 </body>

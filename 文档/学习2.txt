@@ -375,7 +375,7 @@
 					或者已经将my.ini修改 修改好了
 			4.编写sql
 			5.创建语句执行者
-			PreparedStatement st = conn.prepareStatement(sql)
+				PreparedStatement st = conn.prepareStatement(sql)
 			6.设置参数
 				st.setXXX()
 			7.执行sql
