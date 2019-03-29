@@ -17,7 +17,7 @@ public class DataSourceUtils {
 	private static ThreadLocal<Connection> tl = new ThreadLocal();
 	
 	/**
-	 * 获取数据源
+	 * 获取数据源   通过线程开启事务
 	 * @return 连接池
 	 */
 	public static DataSource getDataSource(){	
