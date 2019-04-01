@@ -9,7 +9,7 @@ public class UserService {
 
 
 	public User getUserByUsernameAndPwd(String username, String password) throws SQLException {
-		// TODO Auto-generated method stub
+		// TODO getUserByUsernameAndPwd
 		return new UserDao().getUserByUsernameAndPwd(username,password);
 	}
 

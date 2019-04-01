@@ -12,7 +12,7 @@ public class UserDao {
 
 
 	public User getUserByUsernameAndPwd(String username, String password) throws SQLException {
-		QueryRunner qr = new QueryRunner(new DataSourceUtils().getDataSource());
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
 		String sql = "select * from User where username = ? and password = ?";
 		User user = qr.query(sql, new BeanHandler<>(User.class), username,password);		
 		return user;
