@@ -7,9 +7,9 @@ public class Product implements Serializable{
 	
 	private String pid;
 	private String pname;
-	private String market_price;
+	private double market_price;
 	
-	private String shop_price;
+	private double shop_price;
 	private String pimage;
 	private Date pdate;
 	
@@ -36,19 +36,19 @@ public class Product implements Serializable{
 		this.pname = pname;
 	}
 
-	public String getMarket_price() {
+	public double getMarket_price() {
 		return market_price;
 	}
 
-	public void setMarket_price(String market_price) {
+	public void setMarket_price(double market_price) {
 		this.market_price = market_price;
 	}
 
-	public String getShop_price() {
+	public double getShop_price() {
 		return shop_price;
 	}
 
-	public void setShop_price(String shop_price) {
+	public void setShop_price(double shop_price) {
 		this.shop_price = shop_price;
 	}
 

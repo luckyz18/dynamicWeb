@@ -8,9 +8,9 @@
             	描述：菜单栏
             -->
 			<div class="container-fluid">
-				<div class="col-md-4">
-					<img src="${pageContext.request.contextPath}/img/logo2.png" />
-				</div>
+				 <div class="col-md-4">
+					<img src="${pageContext.request.contextPath}/img/logo2.png---" />
+				</div> 
 				<div class="col-md-5">
 					<img src="${pageContext.request.contextPath}/img/header.png" />
 				</div>
@@ -26,7 +26,7 @@
 							${user.username }你好
 							<li><a href="${pageContext.request.contextPath }/user?method=logout">退出</a></li>
 							<li><a href="${pageContext.request.contextPath }/user?method=">我的订单</a></li>
-							<li><a href="cart.htm">购物车</a></li>
+							<li><a href="${pageContext.request.contextPath }/jsp/cart.jsp">购物车</a></li>
 						</c:if>
 						
 					</ol>

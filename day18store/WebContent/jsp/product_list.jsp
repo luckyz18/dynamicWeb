@@ -165,11 +165,11 @@
 
 </html>
 
-<script>
+<!-- <script>
 	$(function(){
 	
 		$.get("${pageContext.request.contextPath}/product?method=getByPid4Cookie",pids="arr",function(data){
 			
 		},"json");
 	});
-</script>
+</script> -->

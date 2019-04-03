@@ -4,8 +4,10 @@
 	<bean id="ProductService" class="com.service.impl.ProductServiceImpl"></bean>
 	<bean id="UserService" class="com.service.impl.UserServiceImpl"></bean>
 	<bean id="CategoryService" class="com.service.impl.CategoryServiceImpl"></bean>
+	<bean id="OrderService" class="com.service.impl.OrderServiceImpl"></bean>
 	
 	<bean id="CategoryDao" class="com.dao.impl.CategoryDaoImpl"></bean>
 	<bean id="ProductDao" class="com.dao.impl.ProductDaoImpl"></bean>
 	<bean id="UserDao" class="com.dao.impl.UserDaoImpl"></bean>	
+	<bean id="OrderDao" class="com.dao.impl.OrderDaoImpl"></bean>	
 </beans>
