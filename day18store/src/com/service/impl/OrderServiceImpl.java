@@ -1,8 +1,12 @@
 package com.service.impl;
 
+import java.util.List;
+
 import com.dao.OrderDao;
 import com.domain.Order;
 import com.domain.OrderItem;
+import com.domain.Pagebean;
+import com.domain.User;
 import com.service.OrderService;
 import com.utils.BeanFactory;
 import com.utils.DataSourceUtils;
@@ -36,6 +40,44 @@ public class OrderServiceImpl implements OrderService{
 			throw e;
 		}
 		
+		
+	}
+
+	/**
+	 * 分页查询我的订单
+	 * @throws Exception 
+	 */
+	@Override
+	public Pagebean<Order> findAllByPage(int currPage, int pageSize, User user) throws Exception {
+		// TODO 分页查询我的订单
+		OrderDao  dao = (OrderDao) BeanFactory.getbean("OrderDao");
+		
+		//查询当前页数据
+		List<Order> list = dao.findAllByPage(currPage,pageSize,user);
+		
+		//查询总条数 totalCount
+		int totalCount= dao.findTotalCount(user.getUid());
+		
+		return new Pagebean<>(list, currPage, pageSize, totalCount);
+	}
+
+	/**
+	 * 查询订单详情
+	 */
+	@Override
+	public Order getById(String oid) throws Exception {
+		OrderDao  dao = (OrderDao) BeanFactory.getbean("OrderDao");
+		return dao.getById(oid);
+		
+	}
+
+	/**
+	 * 更新订单信息
+	 */
+	@Override
+	public void update(Order order) throws Exception {
+		OrderDao  dao = (OrderDao) BeanFactory.getbean("OrderDao");
+		dao.update(order);
 		
 	}
 

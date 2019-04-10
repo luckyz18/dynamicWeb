@@ -24,9 +24,10 @@ public class Order {
 	private String address;
 	private String name;
 	private String telephone;
-	private User user;
-	
+	private User user;	
 	private List<OrderItem> items  = new LinkedList<>();
+	
+	
 	
 	public List<OrderItem> getItems() {
 		return items;

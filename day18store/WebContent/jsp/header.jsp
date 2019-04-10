@@ -19,13 +19,13 @@
 						<c:if test="${empty user }">
 							<li><a href="${pageContext.request.contextPath }/user?method=loginUI">登录</a></li>
 							<li><a href="${pageContext.request.contextPath }/user?method=registerUI">注册</a></li>
-							<li><a href="cart.htm">购物车</a></li>
+							<li><a href="${pageContext.request.contextPath }/jsp/cart.jsp">购物车</a></li>
 						</c:if>
 						
 						<c:if test="${ not empty user }">
 							${user.username }你好
 							<li><a href="${pageContext.request.contextPath }/user?method=logout">退出</a></li>
-							<li><a href="${pageContext.request.contextPath }/user?method=">我的订单</a></li>
+							<li><a href="${pageContext.request.contextPath }/order?method=findAllByPage&currPage=1">我的订单</a></li>
 							<li><a href="${pageContext.request.contextPath }/jsp/cart.jsp">购物车</a></li>
 						</c:if>
 						

@@ -122,7 +122,7 @@ public class DataSourceUtils {
 			//解除版定
 			tl.remove();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			e.printStackTrace();  
 		}
 	}
 }
