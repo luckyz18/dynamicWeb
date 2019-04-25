@@ -15,7 +15,7 @@ public class Product implements Serializable{
 	
 	private Integer is_hot;  //1热门 0不热门
 	private String pdesc;
-	private Integer pflag;  //1下架 0未下架
+	private Integer pflag=0;  //1下架 0未下架
 	
 	private Category category;  //属于哪一个分类
 	

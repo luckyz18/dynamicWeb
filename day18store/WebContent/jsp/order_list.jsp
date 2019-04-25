@@ -52,7 +52,7 @@
 										已付款
 									</c:if>
 									<c:if test="${order.state == 2 }">
-										<a href="javascript:void(0)">确认收货</a>
+										<a href="${pageContext.request.contextPath}/order?method=updateState&oid=${order.oid}&state=3">确认收货</a>
 									</c:if>
 									<c:if test="${order.state == 3 }">
 										已完成

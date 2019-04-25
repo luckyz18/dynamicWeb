@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class UploadUtils {
 	/**
-	 * 获取随机名称
+	 * 	获取随机名称
 	 * @param realName 真实名称
 	 * @return uuid
 	 */

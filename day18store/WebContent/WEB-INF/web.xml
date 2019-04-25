@@ -4,20 +4,17 @@
     <error-code>500</error-code>
     <location>/500.jsp</location>
   </error-page>
-  <error-page>
-    <error-code>404</error-code>
-    <location>/404.jsp</location>
-  </error-page>
+ 
   <filter>
-  	<filter-name>PrivilegeFilter</filter-name>
-  	<filter-class>com.filter.PrivilegeFilter</filter-class>
+    <filter-name>PrivilegeFilter</filter-name>
+    <filter-class>com.filter.PrivilegeFilter</filter-class>
   </filter>
   <filter-mapping>
-  	<filter-name>PrivilegeFilter</filter-name>
-  	<servlet-name>OrderServlet</servlet-name>
-  	<url-pattern>/jsp/order_list.jsp</url-pattern>
-  	<url-pattern>/jsp/order_info.jsp</url-pattern>
-  	<url-pattern>/jsp/cart.jsp</url-pattern> 	
+    <filter-name>PrivilegeFilter</filter-name>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/jsp/order_list.jsp</url-pattern>
+    <url-pattern>/jsp/order_info.jsp</url-pattern>
+    <url-pattern>/jsp/cart.jsp</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>EncodingFilter</filter-name>
@@ -26,7 +23,7 @@
   <filter-mapping>
     <filter-name>EncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
-  </filter-mapping>  
+  </filter-mapping>
   <servlet>
     <description></description>
     <display-name>BaseServlet</display-name>
@@ -106,5 +103,55 @@
   <servlet-mapping>
     <servlet-name>OrderServlet</servlet-name>
     <url-pattern>/order</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminCategoryServlet</display-name>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <servlet-class>com.web.servlet.AdminCategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminCategoryServlet</servlet-name>
+    <url-pattern>/adminCategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminProductServlet</display-name>
+    <servlet-name>AdminProductServlet</servlet-name>
+    <servlet-class>com.web.servlet.AdminProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminProductServlet</servlet-name>
+    <url-pattern>/adminProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadtestServlet</display-name>
+    <servlet-name>UploadtestServlet</servlet-name>
+    <servlet-class>com.web.servlet.UploadtestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadtestServlet</servlet-name>
+    <url-pattern>/uploadtest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddProductServlet</display-name>
+    <servlet-name>AddProductServlet</servlet-name>
+    <servlet-class>com.web.servlet.AddProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddProductServlet</servlet-name>
+    <url-pattern>/addProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminOrderServlet</display-name>
+    <servlet-name>AdminOrderServlet</servlet-name>
+    <servlet-class>com.web.servlet.AdminOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminOrderServlet</servlet-name>
+    <url-pattern>/adminOrder</url-pattern>
   </servlet-mapping>
 </web-app>

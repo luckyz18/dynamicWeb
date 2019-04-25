@@ -17,4 +17,19 @@ public interface ProductDao {
 
 	int getTotalCount(String cid) throws SQLException;
 
+	void updateProductByCid(String cid)throws  Exception;
+
+	List<Product> findAll() throws Exception;
+
+	List<Product> findAllByPage(int currPage, int pageSize) throws Exception;   //test 分页查询
+
+	int findTotalCount() throws Exception;  //test 分页查询
+
+	void add(Product p) throws Exception;
+
+	List<Product> findAllByStopSell()throws Exception;
+
+	void stopSellByPid(String pid)throws Exception;
+
+
 }

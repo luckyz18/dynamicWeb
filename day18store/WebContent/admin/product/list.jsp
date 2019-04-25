@@ -8,7 +8,7 @@
 		<script language="javascript" src="${pageContext.request.contextPath}/js/public.js"></script>
 		<script type="text/javascript">
 			function addProduct(){
-				window.location.href = "${pageContext.request.contextPath}/adminProduct_addPage.action";
+				window.location.href = "${pageContext.request.contextPath}/adminProduct?method=addUI";
 			}
 		</script>
 	</HEAD>
@@ -25,7 +25,7 @@
 					<tr>
 						<td class="ta_01" align="right">
 							<button type="button" id="add" name="add" value="添加" class="button_add" onclick="addProduct()">
-&#28155;&#21152;
+添加商品
 </button>
 
 						</td>
@@ -57,9 +57,11 @@
 										编辑
 									</td>
 									<td width="7%" align="center">
-										删除
+										下架
 									</td>
 								</tr>
+								
+								
 								<c:forEach items="${list }" var="p" varStatus="vs">
 										<tr onmouseover="this.style.backgroundColor = 'white'"
 											onmouseout="this.style.backgroundColor = '#F5FAFE';">
@@ -91,18 +93,64 @@
 											</td>
 									
 											<td align="center" style="HEIGHT: 22px">
-												<a href="${ pageContext.request.contextPath }/adminProduct_delete.action?pid=">
+												<a href="${ pageContext.request.contextPath }/adminProduct?method=stopSellByPid&pid=${p.pid}">
 													<img src="${pageContext.request.contextPath}/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
 												</a>
 											</td>
 										</tr>
 									</c:forEach>
 							</table>
+							
+							
 						</td>
 					</tr>
 				</TBODY>
 			</table>
+			
 		</form>
+		
+		<!--分页显示  -->
+		<%-- <div style="text-align: center;">
+				<ul>
+				
+					<!--分页显示  上一页  -->
+					<c:if test="${1==pb.currPage}">
+						<li class="disabled"><a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+					</c:if>
+					<c:if test="${1!=pb.currPage}">
+						<li><a href="${pageContext.request.contextPath }/order?method=findAllByPage&currPage=${pb.currPage-1}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+					</c:if>
+					
+					<!-- 分页显示   显示页-->
+					<c:forEach begin="1" end="${pb.totalPage }" var="n"> 
+						<c:if test="${pb.currPage == n }">
+							<li class="active"><a href="javascript:void(0)">${n }</a></li>
+						</c:if>
+						<c:if test="${pb.currPage != n }">
+							<li><a href="${pageContext.request.contextPath }/order?method=findAllByPage&currPage=${n}">${n}</a></li>
+						</c:if>
+					</c:forEach>
+					
+					<!-- 分页显示 下一页 -->
+					<c:if test="${pb.totalPage == pb.currPage }">
+						<li class="disabled">
+							<a href="javascript:void(0)" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</c:if>
+					<c:if test="${pb.totalPage != pb.currPage }">
+						<li>
+							<a href="${pageContext.request.contextPath}/order?method=findAllByPage&currPage=${pb.currPage+1}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</c:if>
+					
+				</ul>
+			</div> --%>
+			
+			
 	</body>
 </HTML>
 

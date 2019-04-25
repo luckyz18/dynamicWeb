@@ -16,6 +16,18 @@ public interface ProductService {
 
 	Pagebean<Product> findByPage(String cid, int currPage, int pageSize) throws Exception;
 
+	List<Product> findAll() throws Exception;
+
+	Pagebean<Product> findAllByPage(int currPage, int pageSize) throws Exception;
+
+	void add(Product p) throws Exception;
+
+	List<Product> findAllByStopSell()throws Exception;
+
+	void stopSellByPid(String pid)throws Exception;
+
+//	void update(Product p)throws Exception;
+
 	
 
 }

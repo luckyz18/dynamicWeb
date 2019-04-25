@@ -21,4 +21,6 @@ public interface OrderDao {
 
 	void update(Order order)throws Exception;
 
+	List<Order> findAllByState(String state) throws NumberFormatException, Exception;
+
 }

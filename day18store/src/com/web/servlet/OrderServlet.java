@@ -304,8 +304,29 @@ public class OrderServlet extends BaseServlet {
 		
 	}
 	
-	
-	
+	/**
+	 * 修改订单状态
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateState(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		String oid = request.getParameter("oid");
+		String state = request.getParameter("state");
+		
+		//service
+		OrderService os = (OrderService) BeanFactory.getbean("OrderService");
+		Order order = os.getById(oid);
+		order.setState(Integer.parseInt(state));
+		
+		os.update(order);
+		
+		response.sendRedirect(request.getContextPath()+"/order?method=findAllByPage&currPage=1");
+		
+		return null;
+		
+	}
 	
 	
 	
