@@ -27,6 +27,14 @@
     		<property name="cust_phone" column="cust_phone"></property>
     		<property name="cust_mobile" column="cust_mobile"></property>
     		
+    		<!-- 一对多  配置一方映射 
+    			inverse : true 放弃维护外键
+    		-->
+    		<set name="linkmans" cascade="save-update" inverse="true" fetch="select" lazy="true">
+    			<key column="lkm_cust_id"></key>
+    			<one-to-many class="com.domain.Linkman" />
+    		</set>
+    		
     	</class>
     </hibernate-mapping>
 	

@@ -22,7 +22,16 @@ public class HibernateUtils {
 	 */
 	public static Session getSession() {
 		return FACTORY.openSession();
-		
 	}
+	
+	
+	public static Session getCurrentSession() {
+		 return FACTORY.getCurrentSession();
+	}
+	
+	public static void main(String[] args) {
+		getSession();
+	}
+	
 	
 }

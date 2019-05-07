@@ -1,31 +1,32 @@
 package com.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Customer {
-	/**
-	 *   `cust_id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '客户编号(主键)',    
-	 *    cust_name` varchar(32) NOT NULL COMMENT '客户名称(公司名称)',    
-	 *    `cust_user_id` bigint(32) DEFAULT NULL COMMENT '负责人id',     
-	 *    `cust_create_id` bigint(32) DEFAULT NULL COMMENT '创建人id',  
-	 *    `cust_source` varchar(32) DEFAULT NULL COMMENT '客户信息来源',   
-	 *    `cust_industry` varchar(32) DEFAULT NULL COMMENT '客户所属行业',   
-	 *    `cust_level` varchar(32) DEFAULT NULL COMMENT '客户级别',   
-	 *    `cust_linkman` varchar(64) DEFAULT NULL COMMENT '联系人',   
-	 *     cust_phone` varchar(64) DEFAULT NULL COMMENT '固定电话',    
-	 *    `cust_mobile` varchar(16) DEFAULT NULL COMMENT '移动电话', 
-	 */
+
 	private Long cust_id;
 	private String cust_name;
 	private Long cust_user_id;
-	
+	private String cust_linkman;
 	private Long cust_create_id;
 	
 	private String cust_source;
 	private String cust_industry;
 	private String cust_level;
-	private String cust_linkman;
+
 	private String cust_phone;
 	private String cust_mobile;
 	
+	/*一对多  一方需要写上多方集合  这里需要new*/
+	private Set<Linkman> linkmans = new HashSet<Linkman>();
+	
+	public Set<Linkman> getLinkmans() {
+		return linkmans;
+	}
+	public void setLinkmans(Set<Linkman> linkmans) {
+		this.linkmans = linkmans;
+	}
 	public Long getCust_id() {
 		return cust_id;
 	}
@@ -86,13 +87,16 @@ public class Customer {
 	public void setCust_mobile(String cust_mobile) {
 		this.cust_mobile = cust_mobile;
 	}
-	
 	@Override
 	public String toString() {
 		return "Customer [cust_id=" + cust_id + ", cust_name=" + cust_name + ", cust_user_id=" + cust_user_id
-				+ ", cust_create_id=" + cust_create_id + ", cust_source=" + cust_source + ", cust_industry="
-				+ cust_industry + ", cust_level=" + cust_level + ", cust_linkman=" + cust_linkman + ", cust_phone="
-				+ cust_phone + ", cust_mobile=" + cust_mobile + "]";
+				+ ", cust_linkman=" + cust_linkman + ", cust_create_id=" + cust_create_id + ", cust_source="
+				+ cust_source + ", cust_industry=" + cust_industry + ", cust_level=" + cust_level + ", cust_phone="
+				+ cust_phone + ", cust_mobile=" + cust_mobile + ", linkmans=" + linkmans + "]";
 	}
+
+	
+	
+
 	
 }

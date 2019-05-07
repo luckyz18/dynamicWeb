@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+    <hibernate-mapping>
+    	<class name="com.domain.User" table="user">
+    		<id name="id" column="id">
+    			<generator class="native"></generator>
+    		</id>
+    		
+    		<!-- 丢失更新的问题 设置版本号 “写的问题” -->
+    		<version name="version" />
+    		
+    		<property name="name" column="name" length="30"></property>
+    		<property name="age" column="age"></property>
+    		
+    		<!--配置多对多
+    			sys_user_role：中间表
+    			多对多必须有一个放弃主键维护
+    		-->
+    		<set name="roles" table="sys_user_role" cascade="save-update">
+    			<key column="user_id"></key>
+    			<many-to-many class="com.domain.Role" column="role_id" />
+    		</set>
+    		
+    	</class>
+ 
+    </hibernate-mapping>
