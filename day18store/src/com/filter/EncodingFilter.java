@@ -73,7 +73,7 @@ class MyRequest extends HttpServletRequestWrapper{
 			return null;
 		}
 		Map<String, String[]> map = getParameterMap();
-		if(map==null || map.size()==0){
+		if(map == null || map.size() == 0){
 			return null;
 		}
 		
@@ -97,7 +97,6 @@ class MyRequest extends HttpServletRequestWrapper{
 				request.setCharacterEncoding("utf-8");
 				return request.getParameterMap();
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else if("get".equalsIgnoreCase(method)){

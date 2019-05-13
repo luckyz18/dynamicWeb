@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 配置常量 -->
+	<!-- 配置动态访问 -->
+	<!-- <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant> -->
+	
+	<package name="demo" namespace="/" extends="struts-default">
+		<!-- 配置全局結果页面 -->
+		<global-results>
+			<result name="success">/demo/success.jsp</result>
+		</global-results>
+		
+    	<!-- 通配符的方式 -->
+    	<action name="linkman_*" class="com.action.LinkmanAction" method="{1}">
+    		<result name="success" type="redirectAction">linkman_delete</result> 
+    	</action>
+    	
+    	<!-- 动态访问方式 -->
+    	<action name="linkman" class="com.action.LinkmanAction" >
+    		<result name="saveOK" >/Hello/success.jsp</result>
+    		<result name="deleteOK" >/Hello/success.jsp</result>
+    	</action>
+    	
+    	<!-- OGNL表达式demo -->
+    	<action name="ognl" class="com.action2.OGNLTest1Action" method="test">
+    		<result name="success">/jsp/ognltest.jsp</result>
+    	</action>
+    	
+    </package>
+	
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="hello" class="com.action.HelloAction" method="helloTest">
+           <!-- 配置跳转的页面，路径的写法，
+           		在structs2中，不管是转发或者是重定向，都不写项目名 
+           		可以有多个result
+           -->
+           <result name="success">/Hello/success.jsp</result>
+        </action>
+        <action name="pojo" class="com.action2.POJOAction"></action>
+        <action name="demo2" class="com.action2.Demo2"></action>
+        <action name="demo3" class="com.action2.Demo3"></action>
+    </package>
+ 
+    <!-- 客户管理系统 test -->
+    <package name="crm" namespace="/" extends="struts-default">
+    	<!-- 拦截器 -->
+    	<interceptors>
+    		<interceptor name="UserIntercepter" class="com.interceptor.UserIntercepter"></interceptor>
+    	</interceptors>
+    	<!--全局结果集  -->
+    	<global-results>
+    		<result name="login">/login.htm</result>
+    	</global-results>
+    	<!-- 用户模块 -->
+    	<action name="user_*" class="com.action.UserAction" method="{1}">
+    		<interceptor-ref name="UserIntercepter">
+    			<!-- login方法不拦截 -->
+    			<param name="excludeMethods">login</param>
+    		</interceptor-ref>
+    		<interceptor-ref name="defaultStack"></interceptor-ref>
+    		<result name="success" >/index.htm</result> 
+    		<!-- <result name="login" >/login.htm</result>  -->
+    	</action>
+    	<!-- 客户模块 -->
+    	<action name="customer_*" class="com.action.CustomerAction" method="{1}">
+    		<interceptor-ref name="UserIntercepter"></interceptor-ref>
+    		<interceptor-ref name="defaultStack"></interceptor-ref>
+    		<result name="success">/jsp/customer/list.jsp</result>
+    	</action>
+    </package>
+    
+    <package name="incepterTest" namespace="/" extends="struts-default">
+    	<!-- 第二种方式 定义拦截器栈 -->
+    	<interceptors>
+    		<interceptor name="DemoIntercepter" class="com.interceptor.DemoIntercepter"></interceptor>
+    		<interceptor-stack name="myStack">
+    			<interceptor-ref name="DemoIntercepter"></interceptor-ref>
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	
+    	<action name="demo2" class="com.action2.Demo2">
+    		<interceptor-ref name="myStack"></interceptor-ref>		
+    	</action>
+    	
+    </package>
+    
+
+</struts>
