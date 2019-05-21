@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 依赖的注入 -->
+    <bean id="userService" class="com.service.UserServiceImpl">
+   		<property name="dao" ref="userDao" />
+    </bean>
+    <bean id="userDao" class="com.dao.UserDaoImpl" />
+    
+    <!-- 集合注入 -->
+   <bean id="carTest" class="com.domain.CarTest"></bean>
+    <bean id="user" class="com.domain.UserTest">
+    	<property name="arr">
+    		<list>
+    			<value>美美</value>
+    			<value>哈哈</value>
+    		</list>
+    	</property>
+    	<property name="car">
+    		<set>
+    			<ref bean="carTest"/>
+    		</set>
+    	</property>
+    	<property name="map">
+    		<map>
+    			<entry key="小花" value-ref="carTest"></entry>
+    		</map>
+    	</property>
+    	<property name="pro">
+    		<props>
+    			<prop key="username">root</prop>
+    		</props>
+    	</property>
+    </bean>
+    
+    <!-- 引入其他配置文件   拆分文件
+    	或者在工厂加载时 加载多个配置文件，一般用引用
+	    <import resource="xx.xml"/>
+    -->
+    
+    
+
+</beans>
