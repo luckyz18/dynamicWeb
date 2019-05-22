@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<package name="crm" extends="struts-default" namespace="/">
+		<!-- 方式1 是用struts2创建action类 -->
+		<!-- <action name="customer_*" class="com.web.action.CustomerAction" method="{1}"></action> --> 
+		
+		<!-- 方式2 用spring框架创建action类 [多例的]【必须手动注入】-->
+		<action name="customer_*" class="customerAction" method="{1}"></action> 
+	</package>
+    
+</struts>
+
+
+
+
+
+
+
+
+
+
+
+
+
