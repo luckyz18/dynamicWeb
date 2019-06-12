@@ -12,7 +12,7 @@ public class MyCglibUtils {
 	public static BookDaoImpl getProxy() {
 		Enhancer enhancer  =new Enhancer();
 		enhancer.setSuperclass(BookDaoImpl.class);
-		enhancer.setCallback(new MethodInterceptor() {
+		enhancer.setCallback(new MethodInterceptor() {   //MethodInterceptor的实现类
 			
 			@Override
 			public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {

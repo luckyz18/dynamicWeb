@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$("#btn").click(function(){
+			var flag = $("#tt").tabs("exists","客户");
+			if(flag){
+				//如果选项卡存在，就让他选中
+				$("#tt").tabs("select","客户");
+			}else{
+				//如果选项卡不存在
+				$('#tt').tabs('add',{    
+				    title:'客户',    
+				    content:'客户',    
+				    closable:true  
+				}); 
+			}
+			
+		});
+	});
+</script>
+</head>
+<body>
+	<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">按钮</a>  
+	
+	<div id="tt" class="easyui-tabs" style="width:500px;height:250px;">
+	    <div title="客户管理" data-options="iconCls:'icon-reload',closable:true" style="padding:20px;display:none;">
+			客户管理呀
+	    </div>
+	</div>
+</body>
+</html>
